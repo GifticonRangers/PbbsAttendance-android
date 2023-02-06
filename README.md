@@ -32,7 +32,7 @@
   <p align="center">
     출결 후 도망가는 학생없는 수업을 만들 수 있는 희망찬 안드로이드 앱
     <br />
-    <a href="https://github.com/GifticonRangers/web-server">Web Server</a>
+    <a href="https://github.com/GifticonRangers/WebServer">Web Server</a>
     ·
     <a href="https://github.com/GifticonRangers/multiple-object-tracking">AI server</a>
     ·
