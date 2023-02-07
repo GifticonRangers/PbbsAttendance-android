@@ -9,5 +9,34 @@
         android:id="@+id/loginFragment"
         android:name="com.example.pbbsattendance.view.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_idInputFragment"
+            app:destination="@id/idInputFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/idInputFragment"
+        android:name="com.example.pbbsattendance.view.IdInputFragment"
+        android:label="fragment_id_input"
+        tools:layout="@layout/fragment_id_input" >
+        <action
+            android:id="@+id/action_idInputFragment_to_passwordFragment"
+            app:destination="@id/passwordFragment" />
+        <action
+            android:id="@+id/action_idInputFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <argument
+            android:name="idTitle"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordFragment"
+        android:name="com.example.pbbsattendance.view.PasswordInputFragment"
+        android:label="fragment_password_input"
+        tools:layout="@layout/fragment_password_input" >
+        <action
+            android:id="@+id/action_passwordFragment_to_idInputFragment"
+            app:destination="@id/idInputFragment" />
+    </fragment>
 </navigation>

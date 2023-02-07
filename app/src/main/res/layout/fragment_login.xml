@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.example.pbbsattendance.R"/>
         <variable
             name="loginFragment"
             type="com.example.pbbsattendance.view.LoginFragment"/>
@@ -51,7 +52,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/suit_extralight"
+                android:fontFamily="@font/suit_regular"
                 android:paddingBottom="4dp"
                 android:text="인천대학교 교수진과 재학생들을 위한"
                 android:textColor="@color/grey2"
@@ -64,7 +65,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/suit_extrabold"
+                android:fontFamily="@font/suit_bold"
                 android:text="빠르고 간편한 출석 시스템"
                 android:textColor="@color/indigo2"
                 android:textSize="20sp"
@@ -85,11 +86,13 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_professor"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="100dp"
                 android:background="@drawable/img_button_blue"
+                android:fontFamily="@font/suit_regular"
                 android:text="교수"
-                android:onClick="@{() -> loginFragment.onNavigateToProfessorLogin()}"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,12 +100,14 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_student"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="100dp"
                 android:layout_marginTop="6dp"
                 android:background="@drawable/img_button_grey"
+                android:fontFamily="@font/suit_regular"
                 android:text="재학생"
-                android:onClick="@{() -> loginFragment.onNavigateToStudentLogin()}"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
