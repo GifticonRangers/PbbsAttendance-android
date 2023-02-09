@@ -14,6 +14,9 @@
         android:font="@font/suit_semibold"/>
     <font
         android:fontStyle="normal"
+        android:font="@font/suit_medium"/>
+    <font
+        android:fontStyle="normal"
         android:font="@font/suit_regular"/>
     <font
         android:fontStyle="normal"
