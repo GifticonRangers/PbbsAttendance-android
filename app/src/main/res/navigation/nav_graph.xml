@@ -20,23 +20,48 @@
         android:label="fragment_id_input"
         tools:layout="@layout/fragment_id_input" >
         <action
-            android:id="@+id/action_idInputFragment_to_passwordFragment"
-            app:destination="@id/passwordFragment" />
-        <action
             android:id="@+id/action_idInputFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <argument
             android:name="idTitle"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_idInputFragment_to_passwordInputFragment"
+            app:destination="@id/passwordInputFragment" />
     </fragment>
     <fragment
-        android:id="@+id/passwordFragment"
+        android:id="@+id/passwordInputFragment"
         android:name="com.example.pbbsattendance.view.PasswordInputFragment"
         android:label="fragment_password_input"
         tools:layout="@layout/fragment_password_input" >
         <action
-            android:id="@+id/action_passwordFragment_to_idInputFragment"
+            android:id="@+id/action_passwordInputFragment_to_idInputFragment"
             app:destination="@id/idInputFragment" />
+        <action
+            android:id="@+id/action_passwordInputFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.pbbsattendance.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_professorViewPagerFragment"
+            app:destination="@id/professorViewPagerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_studentViewPagerFragment"
+            app:destination="@id/studentViewPagerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentViewPagerFragment"
+        android:name="com.example.pbbsattendance.view.StudentViewPagerFragment"
+        android:label="fragment_student_view_pager"
+        tools:layout="@layout/fragment_student_view_pager" />
+    <fragment
+        android:id="@+id/professorViewPagerFragment"
+        android:name="com.example.pbbsattendance.view.ProfessorViewPagerFragment"
+        android:label="fragment_professor_view_pager"
+        tools:layout="@layout/fragment_professor_view_pager" />
 </navigation>

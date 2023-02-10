@@ -31,7 +31,15 @@ class PasswordInputFragment:Fragment() {
         navController = this@PasswordInputFragment.findNavController()
 
         binding.icBackToId.setOnClickListener {
-            view.findNavController().navigate(R.id.action_passwordFragment_to_idInputFragment)
+            view.findNavController().navigate(R.id.action_passwordInputFragment_to_idInputFragment)
         }
+        binding.buttonLogin.setOnClickListener {
+            view.findNavController().navigate(R.id.action_passwordInputFragment_to_homeFragment)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
