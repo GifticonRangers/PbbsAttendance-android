@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PbbsAttendance"
 include ':app'
+include ':app:domain'
+include ':app:data'
