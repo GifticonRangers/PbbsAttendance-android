@@ -1,6 +1,7 @@
 package com.example.data.repository
 
-import com.example.data.datasources.UserRemoteDataSource
+import com.example.data.mapper.UserMapper
+import com.example.data.repository.remote.datasources.UserRemoteDataSource
 import com.example.domain.model.User
 import com.example.domain.repository.UserRepository
 import javax.inject.Inject
@@ -13,6 +14,6 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUser(): User {
-        TODO("Not yet implemented")
+        return UserMapper.mapperToUser(dataSource.getUser())
     }
 }
