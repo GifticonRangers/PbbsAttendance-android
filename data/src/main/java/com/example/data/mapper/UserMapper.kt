@@ -1,6 +1,6 @@
 package com.example.data.mapper
 
-import com.example.data.entity.UserResponse
+import com.example.data.dto.UserResponse
 import com.example.domain.model.User
 import com.example.domain.utils.getDayOfSemester
 import com.example.domain.utils.getRegisterYear
@@ -10,7 +10,8 @@ import java.time.LocalDate
 object UserMapper {
     fun mapperToUser(userResponse: UserResponse): User {
         return User(
-            id = userResponse.idUser,
+            id = userResponse.id,
+            userId = userResponse.idUser,
             pw = userResponse.pwUser,
             name = userResponse.nameUser,
             type = userResponse.typeUser,
