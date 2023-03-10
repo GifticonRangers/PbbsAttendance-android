@@ -1,7 +1,8 @@
 package com.example.domain.model
 
 data class User(
-    val id: String,
+    val id: Long,
+    val userId: String,
     val pw: String,
     val name: String,
     val type: String,
