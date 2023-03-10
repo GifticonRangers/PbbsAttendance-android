@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/ic_backToHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -41,8 +41,8 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView7"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
-            app:layout_constraintTop_toTopOf="@+id/imageView6"
+            app:layout_constraintStart_toEndOf="@+id/ic_backToHome"
+            app:layout_constraintTop_toTopOf="@+id/ic_backToHome"
             app:layout_constraintVertical_bias="0.5" />
 
         <ImageView

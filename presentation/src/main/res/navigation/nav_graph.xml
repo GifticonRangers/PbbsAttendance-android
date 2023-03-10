@@ -53,15 +53,35 @@
         <action
             android:id="@+id/action_homeFragment_to_studentViewPagerFragment"
             app:destination="@id/studentViewPagerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_lectureAddFragment"
+            app:destination="@id/lectureAddFragment" />
     </fragment>
     <fragment
         android:id="@+id/studentViewPagerFragment"
         android:name="com.example.pbbsattendance.view.StudentViewPagerFragment"
         android:label="fragment_student_view_pager"
-        tools:layout="@layout/fragment_student_view_pager" />
+        tools:layout="@layout/fragment_student_view_pager" >
+        <action
+            android:id="@+id/action_studentViewPagerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/professorViewPagerFragment"
         android:name="com.example.pbbsattendance.view.ProfessorViewPagerFragment"
         android:label="fragment_professor_view_pager"
-        tools:layout="@layout/fragment_professor_view_pager" />
+        tools:layout="@layout/fragment_professor_view_pager" >
+        <action
+            android:id="@+id/action_professorViewPagerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lectureAddFragment"
+        android:name="com.example.pbbsattendance.view.LectureAddFragment"
+        android:label="fragment_lecture_add"
+        tools:layout="@layout/fragment_lecture_add" >
+        <action
+            android:id="@+id/action_lectureAddFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

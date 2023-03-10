@@ -36,8 +36,8 @@ class LoginFragment : Fragment() {
         }
 
         binding.buttonStudent.setOnClickListener {
-            val idTile = "학번을 입력해주세요"
-            val action = LoginFragmentDirections.actionLoginFragmentToIdInputFragment(idTile)
+            val idTitle = "학번을 입력해주세요"
+            val action = LoginFragmentDirections.actionLoginFragmentToIdInputFragment(idTitle)
             view.findNavController().navigate(action)
         }
     }
