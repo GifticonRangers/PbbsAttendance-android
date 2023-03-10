@@ -11,21 +11,19 @@ import androidx.navigation.fragment.findNavController
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.databinding.FragmentHomeBinding
 import com.example.pbbsattendance.viewmodel.HomeViewModel
-import com.github.tlaabs.timetableview.Schedule
-import com.github.tlaabs.timetableview.Time
 import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
+    private lateinit var viewModel: HomeViewModel
     lateinit var navController: NavController
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: HomeViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,23 +33,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = this@HomeFragment.findNavController()
-        var scheduleList = ArrayList<Schedule>()
-        var schedule1 = Schedule()
 
-        schedule1.apply {
-            classTitle = "캡스톤 디자인(2)"
-            classPlace = "SH505"
-            professorName = "백형부"
-            startTime = Time(10,0)
-            endTime = Time(12,50)
-            day = 2
-        }
-        scheduleList.add(schedule1)
 
         binding.icPlusSchedule.setOnClickListener {
-            binding.timetable.add(scheduleList)
+            view.findNavController().navigate(R.id.action_homeFragment_to_lectureAddFragment)
         }
-        binding.timetable.setOnStickerSelectEventListener { idx, schedules ->
+        /**학생화면으로 들어가기 위한 임시 네비게이팅*/
+        binding.icEditSchedule.setOnClickListener {
             view.findNavController().navigate(R.id.action_homeFragment_to_studentViewPagerFragment)
         }
     }

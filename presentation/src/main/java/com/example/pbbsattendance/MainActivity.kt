@@ -3,7 +3,9 @@ package com.example.pbbsattendance
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pbbsattendance.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var _binding : ActivityMainBinding? = null
