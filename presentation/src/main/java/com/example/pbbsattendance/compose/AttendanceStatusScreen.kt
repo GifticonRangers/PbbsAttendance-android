@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.pbbsattendance.dummyData.AttendanceStatus
 import com.example.pbbsattendance.dummyData.Lecture
 import com.example.pbbsattendance.ui.theme.*
+import com.example.pbbsattendance.util.colorMapper
 
 @Composable
 fun AttendanceStatusScreen() {
@@ -54,13 +55,13 @@ fun AttendanceStatusScreen() {
 @Composable
 fun StatusCard(data: Lecture){
     Column(
-        Modifier.padding(vertical = 5.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row (
             Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ){
@@ -72,7 +73,7 @@ fun StatusCard(data: Lecture){
                 Text(text = data.status, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 14.sp), color = Blue2)
                 Canvas(modifier = Modifier
                     .size(26.dp)
-                    .padding(horizontal = 8.dp), onDraw = { drawCircle(color = Blue5)})
+                    .padding(horizontal = 8.dp), onDraw = { drawCircle(color = colorMapper(data.status))})
             }
         }
         Row(
