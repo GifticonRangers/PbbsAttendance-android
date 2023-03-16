@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pbbsattendance.R
+import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.ui.theme.*
 import kotlinx.coroutines.launch
 
@@ -81,21 +82,6 @@ fun AfterAttendanceScreen() {
 
 }
 
-@Composable
-fun LectureTitle(title:String, id:String){
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 20.dp)
-    ){
-        Text(
-            text = title,
-            style = TextStyle(fontFamily = suit_semibold, fontWeight = FontWeight.W600, fontSize = 16.sp,),
-            color = Blue1,
-            )
-        Text(text = "(${id})", style = TextStyle(fontFamily = suit_semibold, fontWeight = FontWeight.W600, fontSize = 16.sp), color = Blue1)
-    }
-}
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
 fun LectureCourseBar( course: Int, modalState:ModalBottomSheetState) {

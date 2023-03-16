@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.dummyData.Attendance
 import com.example.pbbsattendance.dummyData.AttendanceHistory
 import com.example.pbbsattendance.dummyData.AttendanceStatus
