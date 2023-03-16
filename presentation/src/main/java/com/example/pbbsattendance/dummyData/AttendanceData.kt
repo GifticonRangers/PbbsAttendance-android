@@ -13,7 +13,14 @@ data class AttendanceHistory(
         Attendance(1, 1, "출석", "23-93-08"),
     )
 )
-
+data class StudentList(
+    var body: Array<Student> = arrayOf(
+        Student("김문기", "202001520", true),
+        Student("김진", "202001530", true),
+        Student("장희권", "202001540", false),
+        Student("이용인", "202001550", true),
+    )
+)
 data class Lecture(
     var classOrder: Int,
     var status:String
@@ -24,4 +31,10 @@ data class Attendance(
     var classOrder: Int,
     var status: String,
     var date: String
+)
+
+data class Student(
+    var name: String,
+    var studentId: String,
+    var isAttendance: Boolean
 )
