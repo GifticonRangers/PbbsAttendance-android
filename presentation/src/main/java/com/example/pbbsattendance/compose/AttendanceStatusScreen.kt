@@ -31,18 +31,6 @@ fun AttendanceStatusScreen() {
             .fillMaxWidth()
     ) {
         LectureTitle(title = "물류의 이해", id = "XAA8057001" )
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .drawBehind {
-                    drawLine(
-                        color = Grey3,
-                        start = Offset(0f, size.height),
-                        end = Offset(size.width, size.height),
-                        strokeWidth = 2f
-                    )
-                }
-        ){}
         LazyColumn{
             itemsIndexed(
                 AttendanceStatus().body //나중엔 데이터로
