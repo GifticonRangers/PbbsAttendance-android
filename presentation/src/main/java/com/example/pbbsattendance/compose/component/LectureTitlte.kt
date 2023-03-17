@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pbbsattendance.ui.theme.Blue1
 import com.example.pbbsattendance.ui.theme.Grey3
+import com.example.pbbsattendance.ui.theme.Grey4
 import com.example.pbbsattendance.ui.theme.suit_semibold
 
 @Composable
@@ -36,10 +37,10 @@ fun LectureTitle(title:String, id:String){
             .fillMaxWidth()
             .drawBehind {
                 drawLine(
-                    color = Grey3,
+                    color = Grey4,
                     start = Offset(0f, size.height),
                     end = Offset(size.width, size.height),
-                    strokeWidth = 1f
+                    strokeWidth = 2f
                 )
             }
     ){}
