@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun CourseModalContent(modalState:ModalBottomSheetState){
+fun LectureTimeModalContent(modalState:ModalBottomSheetState){
     val scope = rememberCoroutineScope()
 
     Card(
@@ -79,5 +79,12 @@ fun CourseItem(course:String, date:String) {
             Text(text = date, modifier = Modifier.align(Alignment.CenterEnd), style = TextStyle(fontFamily = suit_regular, fontSize = 8.sp))
         }
     }
+}
+
+@Preview
+@Composable
+@OptIn(ExperimentalMaterialApi::class)
+fun LectureTimeModalContentPreview(){
+    LectureTimeModalContent(modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden))
 }
 
