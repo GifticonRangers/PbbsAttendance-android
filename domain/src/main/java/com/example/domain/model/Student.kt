@@ -1,4 +1,7 @@
 package com.example.domain.model
 
-class Student {
-}
+data class Student (
+    val name: String,
+    val studentId: String,
+    val attendanceState: String
+)

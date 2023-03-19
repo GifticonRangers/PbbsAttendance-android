@@ -1,4 +1,5 @@
 package com.example.domain.model
 
-class StudentList {
-}
+data class StudentList(
+    val content: Array<Student>
+)
