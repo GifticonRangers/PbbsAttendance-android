@@ -1,5 +1,6 @@
 package com.example.data.module
 
+import com.example.data.api.StudentListService
 import com.example.data.api.UserService
 import com.google.gson.GsonBuilder
 import dagger.Binds
@@ -26,9 +27,15 @@ object ServiceModule {
 
     @Singleton
     @Provides
+    fun provideStudentListService(retrofit: Retrofit):StudentListService{
+        return retrofit.create(StudentListService::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit{
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("http://210.111.178.30")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
