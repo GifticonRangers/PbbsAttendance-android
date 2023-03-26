@@ -47,6 +47,7 @@ fun WithHoldListScreen(){
             LiveStatusView(Grey4, Blue3)
             Row(
                 Modifier
+                    .padding(top = 20.dp)
                     .fillMaxWidth()
                     .drawBehind {
                         drawLine(
