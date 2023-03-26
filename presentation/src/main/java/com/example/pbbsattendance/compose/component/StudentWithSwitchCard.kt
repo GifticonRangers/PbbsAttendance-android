@@ -22,7 +22,7 @@ import com.example.pbbsattendance.ui.theme.Grey2
 import com.example.pbbsattendance.ui.theme.suit_regular
 
 @Composable
-fun StudentCard(data: Student) {
+fun StudentWithSwitchCard(data: Student) {
     Row(
         Modifier
             .padding(bottom = 5.dp)
@@ -46,6 +46,6 @@ fun StudentCard(data: Student) {
 
 @Preview
 @Composable
-fun StudentCardPreview() {
-    StudentCard(data = Student(name = "김문기", studentId = "20202001762", attendanceState = "출석완료"))
+fun StudentWithSwitchCardPreview() {
+    StudentWithSwitchCard(data = Student(name = "김문기", studentId = "20202001762", attendanceState = "출석완료"))
 }
