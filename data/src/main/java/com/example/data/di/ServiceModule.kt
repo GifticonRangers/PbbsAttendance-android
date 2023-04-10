@@ -1,9 +1,10 @@
-package com.example.data.module
+package com.example.data.di
 
+import com.example.data.api.LoginService
 import com.example.data.api.StudentListService
 import com.example.data.api.UserService
 import com.google.gson.GsonBuilder
-import dagger.Binds
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,13 +31,19 @@ object ServiceModule {
     fun provideStudentListService(retrofit: Retrofit):StudentListService{
         return retrofit.create(StudentListService::class.java)
     }
+    @Singleton
+    @Provides
+    fun provideLoginService(retrofit: Retrofit):LoginService{
+        return retrofit.create(LoginService::class.java)
+    }
 
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit{
         return Retrofit.Builder()
-            .baseUrl("http://210.111.178.30")
+            .baseUrl("http://52.79.46.122:8080")
             .client(okHttpClient)
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
     }
@@ -58,7 +65,6 @@ object ServiceModule {
         return Interceptor{ chain ->
             with(chain) {
                 val newRequest = request().newBuilder()
-                    .addHeader("", "")
                     .build()
                 proceed(newRequest)
             }

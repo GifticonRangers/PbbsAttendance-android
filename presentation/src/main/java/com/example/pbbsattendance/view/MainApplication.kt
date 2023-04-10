@@ -1,6 +1,8 @@
 package com.example.pbbsattendance.view
 
 import android.app.Application
+import com.example.data.operator.GlobalResponseOperator
+import com.skydoves.sandwich.SandwichInitializer
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -13,5 +15,6 @@ class MainApplication:Application() {
     override fun onCreate() {
         super.onCreate()
         application = this
+        SandwichInitializer.sandwichOperators += GlobalResponseOperator<Any>(this)
     }
 }
