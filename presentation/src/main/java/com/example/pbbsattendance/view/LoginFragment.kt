@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.pbbsattendance.R
 import com.example.pbbsattendance.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 class LoginFragment : Fragment() {
 
@@ -40,14 +42,14 @@ class LoginFragment : Fragment() {
             val action = LoginFragmentDirections.actionLoginFragmentToIdInputFragment(idTitle)
             view.findNavController().navigate(action)
         }
+
+        binding.buttonSignup.setOnClickListener {
+            view.findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun navigateToPage(actionId: Int){
-        findNavController().navigate(actionId)
     }
 }

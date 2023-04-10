@@ -90,7 +90,8 @@
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.pbbsattendance.view.SignupFragment"
-        android:label="SignupFragment" >
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

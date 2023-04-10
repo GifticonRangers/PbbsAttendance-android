@@ -1,6 +1,5 @@
-package com.example.data.module
+package com.example.data.di
 
-import com.example.data.api.UserService
 import com.example.data.repository.datasource.StudentListRemoteDataSource
 import com.example.data.repository.datasource.StudentListRemoteDataSourceImpl
 import com.example.data.repository.remote.datasources.UserRemoteDataSource
