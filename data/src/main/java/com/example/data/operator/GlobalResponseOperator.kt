@@ -13,29 +13,33 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class GlobalResponseOperator<T> constructor(
+    private val success: suspend (ApiResponse.Success<T>) -> Unit,
     private val application: Application
 ) : ApiResponseSuspendOperator<T>() {
 
     // The body is empty, because we will handle the success case manually.
-    override suspend fun onSuccess(apiResponse: ApiResponse.Success<T>) { }
+    override suspend fun onSuccess(apiResponse: ApiResponse.Success<T>) = success(apiResponse)
 
     // handles error cases when the API request gets an error response.
     // e.g., internal server error.
     override suspend fun onError(apiResponse: ApiResponse.Failure.Error<T>) {
         withContext(Dispatchers.Main) {
             apiResponse.run {
-                Log.d("",message())
+                Log.d("GlobalResponseOperator.onError.apiResponse::",message())
 
                 // handling error based on status code.
                 when (statusCode) {
                     StatusCode.InternalServerError -> toast("InternalServerError")
                     StatusCode.BadGateway -> toast("BadGateway")
-                    else -> toast("$statusCode(${statusCode.code}): ${message()}")
+                    else ->{
+                        Log.d("GlobalResponseOperator.onError.statusCode::","[Code: $statusCode.code]: ${message()}")
+                        toast("$statusCode(${statusCode.code}): ${message()}")
+                    }
                 }
 
                 // map the ApiResponse.Failure.Error to a customized error model using the mapper.
                 map(ErrorEnvelopeMapper) {
-                    Log.d("","[Code: $code]: $message")
+                    Log.d("GlobalResponseOperator.onError.map::","[Code: $code]: $message")
                 }
             }
         }
@@ -46,7 +50,7 @@ class GlobalResponseOperator<T> constructor(
     override suspend fun onException(apiResponse: ApiResponse.Failure.Exception<T>) {
         withContext(Dispatchers.Main) {
             apiResponse.run {
-                Log.d("",message())
+                Log.d("GlobalResponseOperator.onException::",message())
                 toast(message())
             }
         }

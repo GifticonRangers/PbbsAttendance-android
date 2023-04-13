@@ -198,6 +198,7 @@
                         android:layout_marginEnd="100dp"
                         android:fontFamily="@font/suit_regular"
                         android:hint="아이디를 입력해주세요"
+                        android:maxLength="9"
                         android:textColor="@color/grey5"
                         android:textColorHint="@color/grey5"
                         android:textSize="16sp"
@@ -231,11 +232,28 @@
                         app:layout_constraintTop_toTopOf="@+id/button_checkId" />
 
                     <TextView
+                        android:id="@+id/checkIdSuccess"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:text="사용가능한 아이디입니다!"
                         android:textColor="@color/blue1"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/input_signupId"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        android:id="@+id/checkIdError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="사용가능한 아이디가 아닙니다"
+                        android:textColor="@color/design_default_color_error"
+                        android:visibility="invisible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"

@@ -12,14 +12,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignupViewModel @Inject constructor(private val repository:LoginRepositoryImpl):ViewModel(){
-
+    private var _checkIdResult = MutableLiveData<Boolean>()
+    val checkIdResult:LiveData<Boolean> get() = _checkIdResult
     fun checkId(id:String){
         Log.i("id", id)
         viewModelScope.launch {
             val result = repository.checkId(id)
-            when(result){
-                true -> Log.i("id중복 통과", result.toString())
-                else -> Log.i("id중복 실패", result.toString())
+            when (result){
+                true -> _checkIdResult.value = true
+                false -> _checkIdResult.value = false
             }
         }
     }
