@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.domain.model.dto.UserDto
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.databinding.FragmentSignupBinding
+import com.example.pbbsattendance.util.changeToPhoneNumber
 import com.example.pbbsattendance.viewmodel.SignupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,7 +52,7 @@ class SignupFragment:Fragment() {
                     idUser = inputSignupId.text.toString(),
                     pwUser = inputPwConfirm.text.toString(),
                     name = inputName.text.toString(),
-                    phone = inputPhoneNumber.text.toString(),
+                    phone = changeToPhoneNumber(inputPhoneNumber.text.toString()),
                     email= inputEmail.text.toString(),
                     department = inputDepartment.text.toString(),
                     type = genderType,
