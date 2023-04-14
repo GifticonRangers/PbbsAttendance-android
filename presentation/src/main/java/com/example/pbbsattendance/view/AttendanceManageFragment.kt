@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.pbbsattendance.compose.SetUpNavGraph
+import com.example.pbbsattendance.viewmodel.AttendanceManageViewModel
 
 class AttendanceManageFragment:Fragment() {
 

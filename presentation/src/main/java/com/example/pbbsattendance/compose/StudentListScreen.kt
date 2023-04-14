@@ -1,34 +1,21 @@
 package com.example.pbbsattendance.compose
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.domain.model.Student
 import com.example.pbbsattendance.compose.component.LectureTitle
-import com.example.pbbsattendance.compose.component.LiveStatusView
 import com.example.pbbsattendance.compose.component.StudentCard
-import com.example.pbbsattendance.ui.theme.Blue3
-import com.example.pbbsattendance.ui.theme.Grey
 import com.example.pbbsattendance.ui.theme.Grey4
-import com.example.pbbsattendance.ui.theme.suit_regular
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)

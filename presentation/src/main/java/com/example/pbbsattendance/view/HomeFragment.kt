@@ -13,7 +13,6 @@ import com.example.pbbsattendance.databinding.FragmentHomeBinding
 import com.example.pbbsattendance.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
@@ -40,7 +39,8 @@ class HomeFragment : Fragment() {
         }
         /**학생화면으로 들어가기 위한 임시 네비게이팅*/
         binding.icEditSchedule.setOnClickListener {
-            view.findNavController().navigate(R.id.action_homeFragment_to_studentViewPagerFragment)
+            //view.findNavController().navigate(R.id.action_homeFragment_to_studentViewPagerFragment)
+            view.findNavController().navigate(R.id.action_homeFragment_to_professorViewPagerFragment)
         }
     }
 

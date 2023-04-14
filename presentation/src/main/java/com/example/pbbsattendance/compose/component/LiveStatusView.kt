@@ -35,8 +35,8 @@ fun LiveStatusView(color1:Color, color2:Color) {
         modifier = Modifier.padding(top=20.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        ProgressCircle(number = 1, title = "공결")
-        ProgressCircle(number = 4, title = "지각")
+        ProgressCircle(number = 0, title = "공결")
+        ProgressCircle(number = 0, title = "지각")
     }
 }
 

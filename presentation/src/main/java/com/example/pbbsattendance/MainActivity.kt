@@ -2,9 +2,10 @@ package com.example.pbbsattendance
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.pbbsattendance.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 

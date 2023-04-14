@@ -40,7 +40,7 @@ class StudentViewPagerFragment : Fragment() {
 
     private fun getTabTitle(position: Int): String?{
         return when(position) {
-            ATTENDANCE_CHECK_PAGE_INDEX -> "출결 관리"
+            ATTENDANCE_CHECK_PAGE_INDEX -> "출결 체크"
             ATTENDANCE_STATUS_PAGE_INDEX -> "출결 현황"
             ATTENDANCE_HISTORY_PAGE_INDEX -> "출결 기록"
             else -> null

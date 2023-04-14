@@ -7,7 +7,6 @@
         android:layout_height="match_parent"
         tools:context=".view.HomeFragment">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/homeHeader"
             android:layout_width="match_parent"
@@ -55,7 +54,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/imageView5"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -327,21 +325,20 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/constraintLayout2"
                         app:layout_constraintBottom_toBottomOf="parent">
-
-<!--                        <com.github.tlaabs.timetableview.TimetableView-->
-<!--                            android:id="@+id/timetable"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="8dp"-->
-<!--                            app:cell_height="50dp"-->
-<!--                            app:column_count="6"-->
-<!--                            app:header_title="@array/my_header_title"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"-->
-<!--                            app:row_count="8"-->
-<!--                            app:side_cell_width="20dp"/>-->
+                        <com.github.tlaabs.timetableview.TimetableView
+                            android:id="@+id/timetable"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:cell_height="50dp"
+                            app:column_count="6"
+                            app:header_title="@array/my_header_title"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:row_count="8"
+                            app:side_cell_width="20dp"/>
                     </HorizontalScrollView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
