@@ -1,27 +1,20 @@
 package com.example.data.mapper
 
-import com.example.data.dto.UserResponse
-import com.example.domain.model.User
-import com.example.domain.utils.getDayOfSemester
-import com.example.domain.utils.getRegisterYear
-import com.example.domain.utils.getSemester
-import java.time.LocalDate
+import com.example.data.dto.UserResponseDto
+import com.example.domain.model.UserModel
 
 object UserMapper {
-    fun mapperToUser(userResponse: UserResponse): User {
-        return User(
+    fun mapperToUser(userResponse: UserResponseDto): UserModel {
+        return UserModel(
             id = userResponse.id,
-            userId = userResponse.idUser,
-            pw = userResponse.pwUser,
+            idUser = userResponse.idUser,
+            pwUser = userResponse.pwUser,
             name = userResponse.nameUser,
-            type = userResponse.typeUser,
-            gender = "미정",
-            department = userResponse.departmentUser,
-            registerYear = getRegisterYear(userResponse.idUser),
+            phone = userResponse.phoneUser,
             email = userResponse.emailUser,
-            thisYear = LocalDate.now().year.toString(),
-            thisSemester = getSemester(),
-            dayOfSemester = getDayOfSemester()
+            department = userResponse.departmentUser,
+            userType =  userResponse.typeUser,
+            genderType = userResponse.genderUser
         )
     }
 }

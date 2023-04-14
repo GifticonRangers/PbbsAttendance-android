@@ -1,4 +1,4 @@
-package com.example.data.dto
+package com.example.domain.model.dto
 
 data class IdDto(
     val idUser: String

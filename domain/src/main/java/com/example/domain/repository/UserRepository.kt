@@ -1,8 +1,8 @@
 package com.example.domain.repository
 
-import com.example.domain.model.User
+import com.example.domain.model.UserModel
 
 interface UserRepository {
-    suspend fun login():User
-    suspend fun getUser():User
+    suspend fun login(): UserModel
+    suspend fun getUser():UserModel
 }
