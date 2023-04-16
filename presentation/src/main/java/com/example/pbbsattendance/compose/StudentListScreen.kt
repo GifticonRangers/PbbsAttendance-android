@@ -12,7 +12,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.domain.model.Student
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.compose.component.StudentCard
 import com.example.pbbsattendance.ui.theme.Grey4

@@ -13,7 +13,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.domain.model.Student
 import com.example.pbbsattendance.compose.LectureTimeModalContent
 import com.example.pbbsattendance.ui.theme.Blue3
 import com.example.pbbsattendance.ui.theme.Grey4

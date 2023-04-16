@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.domain.model.Student
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.compose.component.LiveStatusView
 import com.example.pbbsattendance.compose.component.StudentCard

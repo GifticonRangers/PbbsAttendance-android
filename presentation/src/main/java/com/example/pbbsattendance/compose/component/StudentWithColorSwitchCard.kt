@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.domain.model.Student
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.ui.theme.*
 import com.example.pbbsattendance.util.colorMapper

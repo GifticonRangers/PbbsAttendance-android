@@ -1,7 +1,6 @@
 package com.example.data.di
 
 import com.example.data.api.LoginService
-import com.example.data.api.StudentListService
 import com.example.data.api.TokenService
 import com.example.data.api.UserService
 import com.google.gson.GsonBuilder
