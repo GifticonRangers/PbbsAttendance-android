@@ -33,7 +33,7 @@
                     android:paddingBottom="40dp">
 
                     <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/ic_back_from_signup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -186,8 +186,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout8"
                     android:layout_width="match_parent"
-                    android:layout_height="105dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_height="105dp">
 
                     <TextView
                         android:id="@+id/textView40"
@@ -438,14 +437,14 @@
                         android:text="성별"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+                        app:layout_constraintBottom_toTopOf="@+id/group_gender"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioGroup
-                        android:id="@+id/radioGroup"
+                        android:id="@+id/group_gender"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"

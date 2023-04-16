@@ -1,7 +1,6 @@
 package com.example.pbbsattendance.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,7 @@ class SignupFragment:Fragment() {
     lateinit var  navController: NavController
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
-    private val sinupViewModel by viewModels<SignupViewModel>()
+    private val signupViewModel by viewModels<SignupViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +38,7 @@ class SignupFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewModel = sinupViewModel
+        binding.viewModel = signupViewModel
         navController = this@SignupFragment.findNavController()
 
 
@@ -63,6 +62,9 @@ class SignupFragment:Fragment() {
             buttonCheckId.setOnClickListener {
                 val result = inputSignupId.text.toString()
                 viewModel?.checkId(result)
+            }
+            icBackFromSignup.setOnClickListener {
+                view.findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
             }
             viewModel?.checkIdResult?.observe(viewLifecycleOwner, Observer {
                 when(it){
