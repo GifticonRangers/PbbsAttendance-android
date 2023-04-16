@@ -9,7 +9,7 @@ import com.skydoves.sandwich.suspendOnSuccess
 import javax.inject.Inject
 
 class SubjectRepositoryImpl @Inject constructor(private val api:SubjectService):SubjectRepository{
-    override suspend fun showSubjects(dto: IdDto): ArrayList<ScheduleSubjectModel> {
+    override suspend fun showScheduleSubjects(dto: IdDto): ArrayList<ScheduleSubjectModel> {
         val result:ArrayList<ScheduleSubjectModel> = arrayListOf()
         api.showScheduleSubjects(dto).suspendOnSuccess {
             this.data.forEach {
