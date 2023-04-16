@@ -1,6 +1,5 @@
 package com.example.pbbsattendance.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,8 +15,8 @@ import javax.inject.Inject
 class SignupViewModel @Inject constructor(private val repository:LoginRepositoryImpl):ViewModel(){
     private var _checkIdResult = MutableLiveData<Boolean>()
     val checkIdResult:LiveData<Boolean> get() = _checkIdResult
-    private var _signupResult = MutableLiveData<UserModel>()
-    val signupResult:LiveData<UserModel> get() = _signupResult
+    private var _signupResult = MutableLiveData<Boolean>()
+    val signupResult:LiveData<Boolean> get() = _signupResult
 
     fun checkId(id:String){
         viewModelScope.launch {
@@ -32,7 +31,10 @@ class SignupViewModel @Inject constructor(private val repository:LoginRepository
     fun signup(dto: UserDto){
         viewModelScope.launch {
             val result = repository.signup(dto)
-            _signupResult.value = result
+            when(result){
+                true -> _signupResult.value = result
+                false -> {}
+            }
         }
     }
 }

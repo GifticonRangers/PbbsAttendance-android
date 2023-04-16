@@ -28,21 +28,12 @@ class LoginRepositoryImpl @Inject constructor(
         return result
     }
 
-    override suspend fun signup(dto: UserDto): UserModel {
-        var signupResult = UserModel(
-            id = null,
-            idUser = null,
-            pwUser = null,
-            name = null,
-            phone = null,
-            email = null,
-            department = null,
-            userType = null,
-            genderType = null)
+    override suspend fun signup(dto: UserDto): Boolean {
+        var result = false
         api.signup(dto).suspendOnSuccess {
-            signupResult = UserMapper.mapperToUser(this.data)
+            result = true
         }
-        return signupResult
+        return result
     }
 
     override suspend fun login(dto: LoginDto):Boolean {

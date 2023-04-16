@@ -20,7 +20,10 @@ class LoginViewModel @Inject constructor(private val repository: LoginRepository
     fun login(dto: LoginDto){
         viewModelScope.launch {
             val result = repository.login(dto)
-            _loginResult.value = result
+            when(result){
+                true -> _loginResult.value = result
+                false -> {}
+            }
         }
     }
 }
