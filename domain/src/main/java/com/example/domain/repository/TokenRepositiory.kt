@@ -1,7 +1,7 @@
 package com.example.domain.repository
 
-import com.example.domain.model.Token
+import com.example.domain.model.TokenModel
 
 interface TokenRepositiory {
-    suspend fun getToken():Token
+    suspend fun getToken(): String
 }

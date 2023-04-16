@@ -1,29 +1,27 @@
 package com.example.data.repository.datasource
 
-import android.content.SharedPreferences
-import androidx.core.content.edit
 import com.example.data.dto.TokenResponse
+import com.example.data.util.PreferenceUtil
 import javax.inject.Inject
 
-interface OnlineTokenDataSource {
-    suspend fun getToken():TokenResponse?
+interface TokenLocalDataSource {
+    suspend fun getAccessToken():String
+    suspend fun getRefreshToken():String
     suspend fun saveToken(token:TokenResponse)
 }
 
-class TokenLocalDataSourceImpl @Inject constructor(private val sharedPreferences: SharedPreferences):OnlineTokenDataSource{
-    override suspend fun getToken(): TokenResponse? {
-        return TokenResponse(
-            token = sharedPreferences.getString("token","")?: return null,
-            refreshToken = sharedPreferences.getString("refreshToken", "")?: return null,
-            expireDate = sharedPreferences.getString("expireDate", "")?: return null
-        )
+class TokenLocalDataSourceImpl @Inject constructor(private val sharedPreferences: PreferenceUtil):TokenLocalDataSource{
+    override suspend fun getAccessToken(): String {
+        return sharedPreferences.getValue("accessToken")
+    }
+
+    override suspend fun getRefreshToken(): String {
+        return sharedPreferences.getValue("refreshToken")
     }
 
     override suspend fun saveToken(token: TokenResponse) {
-        sharedPreferences.edit {
-            putString("token",  token.token)
-            putString("refreshToken", token.refreshToken)
-            putString("expireDate", token.expireDate)
-        }
+        sharedPreferences.setValue("grantType",token.grantType)
+        sharedPreferences.setValue("accessToken",token.accessToken)
+        sharedPreferences.setValue("refreshToken",token.refreshToken)
     }
 }

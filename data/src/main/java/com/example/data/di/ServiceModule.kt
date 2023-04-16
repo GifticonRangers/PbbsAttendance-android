@@ -2,6 +2,7 @@ package com.example.data.di
 
 import com.example.data.api.LoginService
 import com.example.data.api.StudentListService
+import com.example.data.api.TokenService
 import com.example.data.api.UserService
 import com.google.gson.GsonBuilder
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
@@ -31,11 +32,19 @@ object ServiceModule {
     fun provideStudentListService(retrofit: Retrofit):StudentListService{
         return retrofit.create(StudentListService::class.java)
     }
+
     @Singleton
     @Provides
     fun provideLoginService(retrofit: Retrofit):LoginService{
         return retrofit.create(LoginService::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideTokenService(retrofit: Retrofit):TokenService{
+        return retrofit.create(TokenService::class.java)
+    }
+
 
     @Singleton
     @Provides

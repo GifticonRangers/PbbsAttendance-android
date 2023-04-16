@@ -6,7 +6,4 @@ import retrofit2.http.GET
 interface TokenService {
     @GET("/api/admin/token")
     suspend fun getToken():TokenResponse
-
-    @GET("/api/admin/renew")
-    suspend fun getRenew(): TokenResponse
 }

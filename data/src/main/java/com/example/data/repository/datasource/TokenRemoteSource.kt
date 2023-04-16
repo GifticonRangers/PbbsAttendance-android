@@ -4,12 +4,12 @@ import com.example.data.api.TokenService
 import com.example.data.dto.TokenResponse
 import javax.inject.Inject
 
-class TokenRemoteSourceImpl @Inject constructor(private val api: TokenService):OnlineTokenDataSource{
-    override suspend fun getToken(): TokenResponse? {
-        return api.getToken()
-    }
+interface TokenRemoteDataSource {
+    suspend fun getToken():TokenResponse
+}
 
-    override suspend fun saveToken(token: TokenResponse) {
-        TODO("Not yet implemented")
+class TokenRemoteSourceImpl @Inject constructor(private val api: TokenService):TokenRemoteDataSource{
+    override suspend fun getToken(): TokenResponse {
+        return api.getToken()
     }
 }
