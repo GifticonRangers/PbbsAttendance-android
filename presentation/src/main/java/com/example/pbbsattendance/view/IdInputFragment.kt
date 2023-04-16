@@ -39,7 +39,8 @@ class IdInputFragment : Fragment() {
                 view.findNavController().navigate(R.id.action_idInputFragment_to_loginFragment)
             }
             buttonNext.setOnClickListener {
-                view.findNavController().navigate(R.id.action_idInputFragment_to_passwordInputFragment)
+                val action = IdInputFragmentDirections.actionIdInputFragmentToPasswordInputFragment(inputId.text.toString())
+                view.findNavController().navigate(action)
             }
         }
     }

@@ -41,6 +41,10 @@
         <action
             android:id="@+id/action_passwordInputFragment_to_idInputFragment"
             app:destination="@id/idInputFragment" />
+        <argument
+            android:name="idValue"
+            app:argType="string"
+            app:nullable="true" />
         <action
             android:id="@+id/action_passwordInputFragment_to_homeFragment"
             app:destination="@id/homeFragment" />

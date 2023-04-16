@@ -1,6 +1,7 @@
 package com.example.pbbsattendance.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,13 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.data.util.PreferenceUtil
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class LoginFragment : Fragment() {
+class LoginFragment: Fragment() {
 
     lateinit var navController: NavController
     private var _binding : FragmentLoginBinding? = null
