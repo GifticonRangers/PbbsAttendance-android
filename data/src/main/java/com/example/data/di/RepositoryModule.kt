@@ -1,8 +1,10 @@
 package com.example.data.di
 
 import com.example.data.repository.LoginRepositoryImpl
+import com.example.data.repository.SubjectRepositoryImpl
 import com.example.data.repository.UserRepositoryImpl
 import com.example.domain.repository.LoginRepository
+import com.example.domain.repository.SubjectRepository
 import com.example.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
@@ -20,9 +22,9 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindStudentListRepositoryImpl(repository: StudentListRepositoryImpl):StudentListRepository
+    fun bindLoginRepositoryImpl(repository: LoginRepositoryImpl):LoginRepository
 
     @Binds
     @Singleton
-    fun bindLoginRepositoryImpl(repository: LoginRepositoryImpl):LoginRepository
+    fun bindSubjectRepositoryImpl(repository: SubjectRepositoryImpl):SubjectRepository
 }

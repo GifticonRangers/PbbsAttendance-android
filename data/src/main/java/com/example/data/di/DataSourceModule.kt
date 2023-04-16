@@ -19,10 +19,6 @@ interface DataSourceModule {
 
     @Binds
     @Singleton
-    fun bindStudentListRemoteDataSourceImpl(dataSource: StudentListRemoteDataSourceImpl):StudentListRemoteDataSource
-
-    @Binds
-    @Singleton
     fun bindTokenLocalDataSourceImpl(dataSourceImpl: TokenLocalDataSourceImpl):TokenLocalDataSource
 
     @Binds
