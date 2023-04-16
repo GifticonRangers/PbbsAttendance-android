@@ -58,15 +58,15 @@ fun WithHoldListScreen(){
 //                        StudentCard(data = item)
 //                    }
 //                }
-                itemsIndexed(
-                    arrayOf(
-                        Student(name = "이영지", studentId = "202011111", attendanceState = "출석"),
-                        Student(name = "스누피", studentId = "201822222", attendanceState = "출석"),
-                        Student(name = "류승룡", studentId = "201133333", attendanceState = "미출석")
-                    )
-                ) { index, item ->
-                    StudentCard(data = item)
-                }
+//                itemsIndexed(
+//                    arrayOf(
+//                        Student(name = "이영지", studentId = "202011111", attendanceState = "출석"),
+//                        Student(name = "스누피", studentId = "201822222", attendanceState = "출석"),
+//                        Student(name = "류승룡", studentId = "201133333", attendanceState = "미출석")
+//                    )
+//                ) { index, item ->
+//                    StudentCard(data = item)
+//                }
             }
         }
     }

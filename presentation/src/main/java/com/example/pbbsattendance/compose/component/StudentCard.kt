@@ -20,31 +20,31 @@ import com.example.pbbsattendance.ui.theme.Grey
 import com.example.pbbsattendance.ui.theme.Grey2
 import com.example.pbbsattendance.ui.theme.suit_regular
 
-@Composable
-fun StudentCard(data: Student){
-    Row(
-        Modifier
-            .padding(bottom = 5.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(painter = painterResource(id = R.drawable.ic_student), contentDescription = "")
-            Text(text = data.name, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp)  )
-            Text(text = data.studentId, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 10.sp), color = Grey2, modifier = Modifier.padding(start=5.dp) )
-        }
-        Row(
-        ) {
-            //Image(painter = painterResource(id = attendanceImageMaaper(data.isAttendance)), contentDescription = "")
-        }
-    }
-}
-
-@Preview
-@Composable
-fun StudentCardPreview() {
-    StudentWithSwitchCard(data = Student(name = "김문기", studentId = "20202001762", attendanceState = "출석완료"))
-}
+//@Composable
+//fun StudentCard(data: Student){
+//    Row(
+//        Modifier
+//            .padding(bottom = 5.dp)
+//            .fillMaxWidth(),
+//        horizontalArrangement = Arrangement.SpaceBetween,
+//        verticalAlignment = Alignment.CenterVertically
+//    ) {
+//        Row(
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            Image(painter = painterResource(id = R.drawable.ic_student), contentDescription = "")
+//            Text(text = data.name, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp)  )
+//            Text(text = data.studentId, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 10.sp), color = Grey2, modifier = Modifier.padding(start=5.dp) )
+//        }
+//        Row(
+//        ) {
+//            //Image(painter = painterResource(id = attendanceImageMaaper(data.isAttendance)), contentDescription = "")
+//        }
+//    }
+//}
+//
+//@Preview
+//@Composable
+//fun StudentCardPreview() {
+//    StudentWithSwitchCard(data = Student(name = "김문기", studentId = "20202001762", attendanceState = "출석완료"))
+//}

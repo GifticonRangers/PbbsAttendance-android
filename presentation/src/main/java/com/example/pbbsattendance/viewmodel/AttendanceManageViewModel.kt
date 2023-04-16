@@ -13,12 +13,12 @@ import javax.inject.Inject
 class AttendanceManageViewModel @Inject constructor(
     private val getStudentListUseCase: GetStudentListUseCase
 ): ViewModel(){
-    private val _studentList: MutableLiveData<StudentList> = MutableLiveData()
-    val studentList : LiveData<StudentList> = _studentList
-
-    fun getStudentList(){
-        viewModelScope.launch {
-            _studentList.value = getStudentListUseCase.invoke()
-        }
-    }
+//    private val _studentList: MutableLiveData<StudentList> = MutableLiveData()
+//    val studentList : LiveData<StudentList> = _studentList
+//
+//    fun getStudentList(){
+//        viewModelScope.launch {
+//            _studentList.value = getStudentListUseCase.invoke()
+//        }
+//    }
 }

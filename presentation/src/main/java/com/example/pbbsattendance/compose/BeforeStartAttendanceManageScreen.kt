@@ -1,11 +1,9 @@
 package com.example.pbbsattendance.compose
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -22,18 +20,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.pbbsattendance.compose.component.LectureTitle
-import com.example.pbbsattendance.compose.component.StudentCard
 import com.example.pbbsattendance.ui.theme.*
-import com.example.pbbsattendance.viewmodel.AttendanceManageViewModel
 
 
 @Composable
-fun BeforeStartAttendanceManageScreen(navController: NavController, viewModel: AttendanceManageViewModel = hiltViewModel()) {
-    viewModel.getStudentList()
-    val studentListStateContent by viewModel.studentList.observeAsState()
+fun BeforeStartAttendanceManageScreen(navController: NavController) {
+//    viewModel.getStudentList()
+//    val studentListStateContent by viewModel.studentList.observeAsState()
 
     Column(
         Modifier
@@ -84,14 +79,14 @@ fun BeforeStartAttendanceManageScreen(navController: NavController, viewModel: A
             Text(text = "24", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Blue3, modifier = Modifier.padding(start = 5.dp))
         }
         LazyColumn {
-            studentListStateContent?.let {
-                itemsIndexed(
-                    it.content
-                ) { index, item ->
-                    StudentCard(data = item)
-                    Log.i("Attendance", item.name)
-                }
-            }
+//            studentListStateContent?.let {
+//                itemsIndexed(
+//                    it.content
+//                ) { index, item ->
+//                    StudentCard(data = item)
+//                    Log.i("Attendance", item.name)
+//                }
+//            }
         }
     }
 }
