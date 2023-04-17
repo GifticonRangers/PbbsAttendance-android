@@ -1,5 +1,5 @@
 package com.example.domain.model.dto
 
 data class IdDto(
-    val idUser: String
+    val id:Int
 )
