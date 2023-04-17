@@ -1,17 +1,11 @@
 package com.example.data.repository
 
-import android.util.Log
 import com.example.data.api.LoginService
-import com.example.data.dto.TokenResponse
-import com.example.domain.model.dto.IdDto
-import com.example.data.mapper.UserMapper
+import com.example.domain.model.dto.IdUserDto
 import com.example.data.repository.datasource.TokenLocalDataSourceImpl
-import com.example.domain.model.TokenModel
-import com.example.domain.model.UserModel
 import com.example.domain.model.dto.LoginDto
 import com.example.domain.model.dto.UserDto
 import com.example.domain.repository.LoginRepository
-import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
 import javax.inject.Inject
 
@@ -22,7 +16,7 @@ class LoginRepositoryImpl @Inject constructor(
 
     override suspend fun checkId(id: String):Boolean{
         var result = false
-        api.checkId(IdDto(idUser = id)).suspendOnSuccess {
+        api.checkId(IdUserDto(idUser = id)).suspendOnSuccess {
             result = this.data
         }
         return result
