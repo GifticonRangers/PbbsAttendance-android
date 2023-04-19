@@ -1,0 +1,32 @@
+com.github.tlaabs.timetableview
+array default_header_title
+array default_sticker_color
+attr cell_height
+attr column_count
+attr header_highlight_color
+attr header_highlight_image
+attr header_highlight_image_size
+attr header_highlight_type
+attr header_title
+attr row_count
+attr side_cell_width
+attr start_time
+attr sticker_colors
+color colorHeader
+color colorHeaderText
+color colorTableItem
+color default_header_font_color
+color default_header_highlight_color
+color default_header_highlight_font_color
+color default_side_header_font_color
+color default_sticker_font_color
+drawable item_border
+id color
+id image
+id sticker_box
+id table_box
+id table_header
+layout inner_table
+layout table_header
+layout view_timetable
+styleable TimetableView cell_height column_count header_highlight_color header_highlight_image header_highlight_image_size header_highlight_type header_title row_count side_cell_width start_time sticker_colors

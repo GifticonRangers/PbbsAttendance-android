@@ -2,7 +2,6 @@ package com.example.pbbsattendance.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.data.api.SubjectService
 import com.example.data.repository.SubjectRepositoryImpl
 import com.example.domain.model.UserModel
 import com.example.domain.model.dto.IdDto

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="default_header_title">
+        <item/>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+    </string-array>
+    <string-array name="default_sticker_color">
+        <item>#f08676</item>
+        <item>#ecc369</item>
+        <item>#a7ca70</item>
+        <item>#7dd1c1</item>
+        <item>#7aa5e9</item>
+        <item>#fbaa68</item>
+        <item>#9f86e1</item>
+        <item>#78cb87</item>
+        <item>#d397ed</item>
+    </string-array>
+    <color name="colorHeader">#fcfcfc</color>
+    <color name="colorHeaderText">#7d7d7d</color>
+    <color name="colorTableItem">#efefef</color>
+    <color name="default_header_font_color">#7d7d7d</color>
+    <color name="default_header_highlight_color">#74a4f3</color>
+    <color name="default_header_highlight_font_color">#ffffff</color>
+    <color name="default_side_header_font_color">#7d7d7d</color>
+    <color name="default_sticker_font_color">#ffffff</color>
+    <declare-styleable name="TimetableView">
+        <attr format="integer" name="row_count"/>
+        <attr format="integer" name="column_count"/>
+        <attr format="dimension" name="cell_height"/>
+        <attr format="dimension" name="side_cell_width"/>
+        <attr format="reference" name="header_title"/>
+        <attr format="reference" name="sticker_colors"/>
+        <attr format="integer" name="start_time"/>
+        <attr format="color" name="header_highlight_color"/>
+        <attr format="enum" name="header_highlight_type">
+            <enum name="color" value="0"/>
+            <enum name="image" value="1"/>
+        </attr>
+        <attr format="dimension" name="header_highlight_image_size"/>
+        <attr format="reference" name="header_highlight_image"/>
+    </declare-styleable>
+</resources>
