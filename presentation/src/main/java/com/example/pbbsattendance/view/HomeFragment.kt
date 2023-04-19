@@ -35,7 +35,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        val baseInflater = LayoutInflater.from(requireActivity())
+        _binding = DataBindingUtil.inflate(baseInflater, R.layout.fragment_home, container, false)
         return binding.root
     }
 
@@ -45,6 +46,7 @@ class HomeFragment : Fragment() {
         binding.viewModel = homeViewModel
 
         binding.apply {
+            viewModel?.showScheduleSubjects(IdDto(id = 3))
 
             icPlusSchedule.setOnClickListener {
                 view.findNavController().navigate(R.id.action_homeFragment_to_lectureAddFragment)
