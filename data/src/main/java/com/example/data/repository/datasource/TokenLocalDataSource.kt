@@ -5,13 +5,13 @@ import com.example.data.util.PreferenceUtil
 import javax.inject.Inject
 
 interface TokenLocalDataSource {
-    suspend fun getAccessToken():String
+    fun getAccessToken():String
     suspend fun getRefreshToken():String
     suspend fun saveToken(token:TokenResponse)
 }
 
 class TokenLocalDataSourceImpl @Inject constructor(private val sharedPreferences: PreferenceUtil):TokenLocalDataSource{
-    override suspend fun getAccessToken(): String {
+    override fun getAccessToken(): String {
         return sharedPreferences.getValue("accessToken")
     }
 

@@ -4,6 +4,8 @@ import com.example.data.api.LoginService
 import com.example.data.api.SubjectService
 import com.example.data.api.TokenService
 import com.example.data.api.UserService
+import com.example.data.repository.datasource.TokenLocalDataSource
+import com.example.data.repository.datasource.TokenLocalDataSourceImpl
 import com.google.gson.GsonBuilder
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -69,10 +71,11 @@ object ServiceModule {
 
     @Singleton
     @Provides
-    fun provideHeaderInterceptor(): Interceptor {
+    fun provideHeaderInterceptor(tokenLocalDataSource: TokenLocalDataSourceImpl): Interceptor {
         return Interceptor{ chain ->
             with(chain) {
                 val newRequest = request().newBuilder()
+                    .addHeader("",tokenLocalDataSource.getAccessToken())
                     .build()
                 proceed(newRequest)
             }
