@@ -7,14 +7,12 @@ object UserMapper {
     fun mapperToUser(userResponse: UserResponseDto): UserModel {
         return UserModel(
             id = userResponse.id,
-            idUser = userResponse.idUser,
-            pwUser = userResponse.pwUser,
-            name = userResponse.nameUser,
-            phone = userResponse.phoneUser,
-            email = userResponse.emailUser,
-            department = userResponse.departmentUser,
-            userType =  userResponse.typeUser,
-            genderType = userResponse.genderUser
+            typeUser = userResponse.typeUser,
+            nameUser = userResponse.nameUser,
+            phoneUser = userResponse.phoneUser,
+            emailUser = userResponse.emailUser,
+            departmentUser = userResponse.departmentUser,
+            genderUser = userResponse.genderUser
         )
     }
 }
