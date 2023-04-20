@@ -9,9 +9,6 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val dataSource: UserRemoteDataSource
 ):UserRepository {
-    override suspend fun login(): UserModel {
-        TODO("Not yet implemented")
-    }
 
     override suspend fun getUser(): UserModel {
         return UserMapper.mapperToUser(dataSource.getUser())
