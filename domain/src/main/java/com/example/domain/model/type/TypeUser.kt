@@ -1,5 +1,8 @@
 package com.example.domain.model.type
 
-enum class TypeUser {
-    ADMIN, PROFESSOR, STUDENT
+enum class TypeUser (val koName:String)
+{
+    ADMIN("ADMIN"),
+    PROFESSOR("PROFESSOR"),
+    STUDENT("STUDENT")
 }

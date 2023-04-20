@@ -1,5 +1,6 @@
 package com.example.domain.model.type
 
-enum class GenderUser {
-    MALE, FEMALE
+enum class GenderUser(val koName:String) {
+    MALE("MALE"),
+    FEMALE("FEMALE")
 }
