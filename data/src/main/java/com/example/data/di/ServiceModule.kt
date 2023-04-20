@@ -75,7 +75,7 @@ object ServiceModule {
         return Interceptor{ chain ->
             with(chain) {
                 val newRequest = request().newBuilder()
-                    .addHeader("",tokenLocalDataSource.getAccessToken())
+                    .addHeader("Authorization","Bearer "+tokenLocalDataSource.getAccessToken())
                     .build()
                 proceed(newRequest)
             }
