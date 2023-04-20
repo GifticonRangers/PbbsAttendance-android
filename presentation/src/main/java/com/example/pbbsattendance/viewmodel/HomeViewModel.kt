@@ -25,9 +25,9 @@ class HomeViewModel @Inject constructor(
     val scheduleSubjectsResult: LiveData<ArrayList<Schedule>> = _scheduleSubjectsResult
     private var scheduleSubjectArrayList = arrayListOf<Schedule>()
 
-    fun getUser(){
+    fun getUser(dto:IdDto){
         viewModelScope.launch {
-            _user.value = getUserUseCase.invoke()
+            _user.value = getUserUseCase.invoke(dto)
         }
     }
 

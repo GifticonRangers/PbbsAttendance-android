@@ -18,6 +18,8 @@ import com.example.domain.model.dto.IdDto
 import com.example.domain.usecases.GetUserUseCase
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.databinding.FragmentHomeBinding
+import com.example.pbbsattendance.util.mapPepTalk
+import com.example.pbbsattendance.util.mapUserType
 import com.example.pbbsattendance.viewmodel.HomeViewModel
 import com.example.pbbsattendance.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +48,7 @@ class HomeFragment : Fragment() {
         binding.viewModel = homeViewModel
 
         binding.apply {
-            viewModel?.showScheduleSubjects(IdDto(id = 3))
+            viewModel?.getUser(IdDto(id=3))
 
             icPlusSchedule.setOnClickListener {
                 view.findNavController().navigate(R.id.action_homeFragment_to_lectureAddFragment)
@@ -56,7 +58,12 @@ class HomeFragment : Fragment() {
                 //view.findNavController().navigate(R.id.action_homeFragment_to_studentViewPagerFragment)
                 view.findNavController().navigate(R.id.action_homeFragment_to_professorViewPagerFragment)
             }
-
+            viewModel?.user?.observe(viewLifecycleOwner, Observer {
+                viewModel?.showScheduleSubjects(IdDto(it.id!!))
+                userName.text = it.nameUser
+                userType.text = mapUserType(it.typeUser?.koName)
+                peptalk.text = mapPepTalk(it.typeUser?.koName)
+            })
             viewModel?.scheduleSubjectsResult?.observe(viewLifecycleOwner, Observer {
                 Log.i("scheduleSubjectsResult","timetable create")
                 it.forEach {
