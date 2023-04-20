@@ -342,7 +342,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:row_count="8"
+                            app:row_count="10"
                             app:side_cell_width="20dp"/>
                     </HorizontalScrollView>
                 </androidx.constraintlayout.widget.ConstraintLayout>

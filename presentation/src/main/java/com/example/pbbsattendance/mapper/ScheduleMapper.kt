@@ -10,7 +10,7 @@ object ScheduleMapper {
         val schedule = Schedule()
         schedule.startTime = Time(scheduleSubjectModel.startHourSubject!!, scheduleSubjectModel.startMinuteSubject!!)
         schedule.endTime = Time(scheduleSubjectModel.endHourSubject!!, scheduleSubjectModel.endMinuteSubject!!)
-        schedule.day = mapScheduleDay(scheduleSubjectModel.daySubject!!)
+        schedule.day = mapScheduleDay(scheduleSubjectModel.daySubject)
         schedule.classPlace = scheduleSubjectModel.locationSubject
         schedule.classTitle = scheduleSubjectModel.nameSubject
         schedule.professorName = scheduleSubjectModel.profSubject

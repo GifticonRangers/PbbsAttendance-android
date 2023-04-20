@@ -1,6 +1,6 @@
 package com.example.pbbsattendance.util
 
-fun mapScheduleDay(day:String):Int{
+fun mapScheduleDay(day:String?):Int{
     var result=0
     when(day){
         "월" -> result=0

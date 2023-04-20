@@ -59,6 +59,15 @@ class HomeFragment : Fragment() {
 
             viewModel?.scheduleSubjectsResult?.observe(viewLifecycleOwner, Observer {
                 Log.i("scheduleSubjectsResult","timetable create")
+                it.forEach {
+                    Log.i("Result.classTitle","${it.classTitle}")
+                    Log.i("Result.day","${it.day}")
+                    Log.i("Result.startTime","${it.startTime}")
+                    Log.i("Result.endTime","${it.endTime}")
+                    Log.i("Result.professorName","${it.professorName}")
+                    Log.i("Result.classPlace","${it.classPlace}")
+                }
+
                 timetable.add(it)
             })
         }

@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface SubjectService {
-    @POST("/api/subject/showSubjectByUserId")
+    @POST("/api/subject/showScheduleSubjectByUserId")
     suspend fun showScheduleSubjects(@Body dto: IdDto):ApiResponse<Array<ScheduleSubjectResponseDto>>
 }
