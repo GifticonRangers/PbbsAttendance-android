@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
             timetable.setOnScheduleClickListener(
                 object :OnScheduleClickListener{
                     override fun scheduleClicked(entity: ScheduleEntity) {
-                        Log.i("OnScheduleClickListener", "id:${entity.originId}, scheduleName:${entity.scheduleName}, roonInfo:${entity.roomInfo}")
+                        viewModel?.postScheduleSubjectEvent(entity)
                         when(userData.typeUser){
                             TypeUser.PROFESSOR -> view.findNavController().navigate(R.id.action_homeFragment_to_professorViewPagerFragment)
                             TypeUser.STUDENT -> view.findNavController().navigate(R.id.action_homeFragment_to_studentViewPagerFragment)
@@ -69,7 +69,6 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
-
             )
 
             viewModel?.user?.observe(viewLifecycleOwner, Observer {

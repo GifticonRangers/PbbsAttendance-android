@@ -47,8 +47,8 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun postScheduleSubjectEvent(index:Int){
-        EventBus.getDefault().post(ScheduleSubjectEvent(scheduleSubjectArrayList.get(index)))
+    fun postScheduleSubjectEvent(data:ScheduleEntity){
+        EventBus.getDefault().post(ScheduleSubjectEvent(data))
     }
 
 }
