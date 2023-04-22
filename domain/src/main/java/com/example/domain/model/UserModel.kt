@@ -5,6 +5,7 @@ import com.example.domain.model.type.TypeUser
 
 data class UserModel(
     val id: Int?,
+    val idUser: String?,
     val typeUser: TypeUser?,
     val nameUser: String?,
     val phoneUser: String?,

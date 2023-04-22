@@ -7,6 +7,7 @@ object UserMapper {
     fun mapperToUser(userResponse: UserResponseDto): UserModel {
         return UserModel(
             id = userResponse.id,
+            idUser = userResponse.idUser,
             typeUser = userResponse.typeUser,
             nameUser = userResponse.nameUser,
             phoneUser = userResponse.phoneUser,
