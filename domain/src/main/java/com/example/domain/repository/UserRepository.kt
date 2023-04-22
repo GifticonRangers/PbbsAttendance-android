@@ -5,4 +5,5 @@ import com.example.domain.model.dto.IdDto
 
 interface UserRepository {
     suspend fun getUser(dto:IdDto):UserModel
+    suspend fun getUserBySubjectId(dto: IdDto):ArrayList<UserModel>
 }
