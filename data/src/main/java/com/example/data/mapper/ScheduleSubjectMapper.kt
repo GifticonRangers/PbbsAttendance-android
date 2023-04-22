@@ -9,10 +9,8 @@ object ScheduleSubjectMapper {
     fun mapperToScheduleSubject(scheduleSubjectResponse: ScheduleSubjectResponseDto): ScheduleSubjectModel{
         return ScheduleSubjectModel(
             id = scheduleSubjectResponse.id,
-            startHourSubject = getHour(scheduleSubjectResponse.startTimeSubject),
-            startMinuteSubject = getMinute(scheduleSubjectResponse.startTimeSubject),
-            endHourSubject = getHour(scheduleSubjectResponse.endTimeSubject),
-            endMinuteSubject = getMinute(scheduleSubjectResponse.endTimeSubject),
+            startTimeSubject = scheduleSubjectResponse.startTimeSubject,
+            endTimeSubject = scheduleSubjectResponse.endTimeSubject,
             daySubject = scheduleSubjectResponse.daySubject,
             nameSubject = scheduleSubjectResponse.nameSubject,
             locationSubject = scheduleSubjectResponse.locationSubject,
