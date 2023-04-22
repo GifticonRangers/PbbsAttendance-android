@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.islandparadise14.mintable.ScheduleEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-class MainViewModel (): ViewModel(){
+
+class MainViewModel(): ViewModel(){
 
     companion object{
         private var schduleSubject = ScheduleEntity(

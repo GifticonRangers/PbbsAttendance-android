@@ -32,7 +32,7 @@ fun BeforeStartAttendanceManageScreen(
     viewModel: MainViewModel = hiltViewModel()
 ) {
     val scheduleSubject = viewModel.getScheduleSubject()
-    
+
     Column(
         Modifier
             .background(color = Color.White)

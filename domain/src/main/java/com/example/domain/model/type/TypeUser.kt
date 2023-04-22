@@ -4,5 +4,5 @@ enum class TypeUser (val koName:String)
 {
     ADMIN("ADMIN"),
     PROFESSOR("PROFESSOR"),
-    STUDENT("STUDENT")
+    STUDENT("STUDENT"),
 }
