@@ -50,7 +50,7 @@ fun AttendanceCheckScreen(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LectureTitle(title = "물류의 이해", id = "XAA8057001")
+            LectureTitle(title = "물류의 이해")
             LectureCourseBar(course = 1, modalState = state)
             BeforeAttendanceScreen()
         }

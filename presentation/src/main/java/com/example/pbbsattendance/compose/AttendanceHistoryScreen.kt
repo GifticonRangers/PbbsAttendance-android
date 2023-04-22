@@ -31,7 +31,7 @@ fun AttendanceHistoryScreen() {
             .background(color = Color.White)
             .fillMaxWidth()
     ) {
-        LectureTitle(title = "물류의 이해", id = "XAA8057001" )
+        LectureTitle(title = "물류의 이해")
         LazyColumn{
             itemsIndexed(
                 AttendanceHistory().body //나중엔 데이터로

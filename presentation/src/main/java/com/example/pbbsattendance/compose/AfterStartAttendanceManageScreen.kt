@@ -42,7 +42,7 @@ fun AfterStartAttendanceManageScreen(navController: NavController) {
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LectureTitle(title = "물류의 이해", id = "XAA8057001")
+            LectureTitle(title = "물류의 이해")
             LiveStatusView(Blue3, Grey4)
             Button(
                 onClick = { navController.navigate(route = Screen.BeforeStartAttendanceManage.route) },

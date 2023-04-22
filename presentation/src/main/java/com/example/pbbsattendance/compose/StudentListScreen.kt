@@ -24,7 +24,7 @@ fun StudentListScreen(){
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LectureTitle(title = "물류의 이해", id = "XAA8057001")
+        LectureTitle(title = "물류의 이해")
         Row(
             Modifier
                 .fillMaxWidth()

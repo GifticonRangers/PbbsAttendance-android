@@ -1,6 +1,5 @@
 package com.example.pbbsattendance.compose
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,8 +9,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -24,46 +21,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.domain.model.ScheduleSubjectModel
 import com.example.pbbsattendance.compose.component.LectureTitle
-import com.example.pbbsattendance.eventbus.ScheduleSubjectEvent
 import com.example.pbbsattendance.ui.theme.*
-import com.example.pbbsattendance.viewmodel.AttendanceManageViewModel
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
+import com.example.pbbsattendance.viewmodel.MainViewModel
 
 
 @Composable
 fun BeforeStartAttendanceManageScreen(
     navController: NavController,
-    viewModel: AttendanceManageViewModel = hiltViewModel()
+    viewModel: MainViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
-    val activity = context.findActivity()
-
-
-//    DisposableEffect(key1 = viewModel){
-//        viewModel.onStart()
-//        if (!EventBus.getDefault().isRegistered(activity)) {
-//            EventBus.getDefault().register(activity);
-//        }
-//
-//        onDispose {
-//            viewModel.onStop()
-//            if (EventBus.getDefault().isRegistered(activity)) {
-//                EventBus.getDefault().unregister(activity);
-//            }
-//        }
-//    }
-
+    val scheduleSubject = viewModel.getScheduleSubject()
+    
     Column(
         Modifier
             .background(color = Color.White)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LectureTitle(title = "물류의 이해", id = "XAA8057001")
+        LectureTitle(title = scheduleSubject.scheduleName)
         Button(
             onClick = { navController.navigate(route = Screen.AfterStartAttendanceManage.route) },
             colors = ButtonDefaults.buttonColors(backgroundColor = Blue4),

@@ -1,5 +1,5 @@
 package com.example.pbbsattendance.eventbus
 
-import com.example.domain.model.ScheduleSubjectModel
+import com.islandparadise14.mintable.ScheduleEntity
 
-class ScheduleSubjectEvent(val scheduleSubject:ScheduleSubjectModel)
+class ScheduleSubjectEvent(val scheduleSubject:ScheduleEntity)

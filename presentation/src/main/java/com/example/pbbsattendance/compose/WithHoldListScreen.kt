@@ -34,7 +34,7 @@ fun WithHoldListScreen(){
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LectureTitle(title = "물류의 이해", id = "XAA8057001")
+            LectureTitle(title = "물류의 이해")
             LiveStatusView(Grey4, Blue3)
             Row(
                 Modifier
