@@ -1,5 +1,6 @@
 package com.example.pbbsattendance.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,12 +14,13 @@ import javax.inject.Inject
 class AttendanceManageViewModel @Inject constructor(
     private val getStudentListUseCase: GetStudentListUseCase
 ): ViewModel(){
-//    private val _studentList: MutableLiveData<StudentList> = MutableLiveData()
-//    val studentList : LiveData<StudentList> = _studentList
-//
-//    fun getStudentList(){
-//        viewModelScope.launch {
-//            _studentList.value = getStudentListUseCase.invoke()
-//        }
-//    }
+    fun onStart() {
+        // start task - the composable has entered the composition
+        Log.i("AttendanceManageViewModel.onStart","the composable has entered the composition")
+    }
+
+    fun onStop() {
+        // cancel task - the composable has left the composition
+        Log.i("AttendanceManageViewModel.onStop","the composable has left the composition")
+    }
 }

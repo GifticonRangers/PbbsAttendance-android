@@ -19,14 +19,14 @@ import com.example.pbbsattendance.ui.theme.Grey4
 import com.example.pbbsattendance.ui.theme.suit_semibold
 
 @Composable
-fun LectureTitle(title:String, id:String){
+fun LectureTitle(title:String?, id:String){
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 20.dp)
     ){
         Text(
-            text = title,
+            text = title?:"",
             style = TextStyle(fontFamily = suit_semibold, fontWeight = FontWeight.W600, fontSize = 16.sp,),
             color = Blue1,
         )

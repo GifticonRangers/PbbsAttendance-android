@@ -41,7 +41,6 @@ class PasswordInputFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = this@PasswordInputFragment.findNavController()
         binding.viewModel = loginViewModel
-
         binding.apply {
             icBackToId.setOnClickListener {
                 view.findNavController().navigate(R.id.action_passwordInputFragment_to_idInputFragment)

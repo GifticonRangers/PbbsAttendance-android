@@ -1,5 +1,8 @@
 package com.example.pbbsattendance.compose
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -21,11 +25,18 @@ import com.example.pbbsattendance.R
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.ui.theme.*
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun AttendanceCheckScreen() {
+fun AttendanceCheckScreen(
+
+) {
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+//    val context = LocalContext.current
+//    val activity = context.findActivity()
+//    EventBus.getDefault().register(activity)
+
 
     ModalBottomSheetLayout(
         sheetState = state,
@@ -46,7 +57,6 @@ fun AttendanceCheckScreen() {
     }
 
 }
-
 @Composable
 fun BeforeAttendanceScreen() {
     Button(
@@ -84,6 +94,15 @@ fun LectureCourseBar( course: Int, modalState:ModalBottomSheetState) {
             Icon(painter = painterResource(id = R.drawable.ic_more), contentDescription = "")
         }
     }
+}
+
+internal fun Context.findActivity(): Activity {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is Activity) return context
+        context = context.baseContext
+    }
+    throw IllegalStateException("Permissions should be called in the context of an Activity")
 }
 
 @Preview

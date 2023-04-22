@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -22,6 +21,7 @@ import com.example.pbbsattendance.util.mapPepTalk
 import com.example.pbbsattendance.util.mapUserType
 import com.example.pbbsattendance.viewmodel.HomeViewModel
 import com.github.tlaabs.timetableview.Schedule
+import com.github.tlaabs.timetableview.Time
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 
@@ -33,6 +33,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel by viewModels<HomeViewModel>()
     lateinit var userData: UserModel
+    private var scheduleList = arrayListOf<Schedule>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,20 +51,33 @@ class HomeFragment : Fragment() {
         binding.viewModel = homeViewModel
 
         binding.apply {
-            viewModel?.getUser(IdDto(id=3))
+            viewModel?.getUser(IdDto(id=5))
 
             icPlusSchedule.setOnClickListener {
                 view.findNavController().navigate(R.id.action_homeFragment_to_lectureAddFragment)
             }
-
+            icEditSchedule.setOnClickListener {
+                val schedule = Schedule()
+                schedule.startTime = Time(10,0)
+                schedule.endTime = Time(13,10)
+                schedule.classTitle = "세미나"
+                schedule.day = 1
+                scheduleList.add(schedule)
+                timetable.add(scheduleList)
+            }
             timetable.setOnStickerSelectEventListener{ i: Int, schedules: ArrayList<Schedule> ->
+                Log.i("HomeFragment::i", i.toString())
+                Log.i("HomeFragment::", timetable.id.toString())
+                //Log.i("HomeFragment::info", "${schedules[i].classTitle}, ${schedules[i].classPlace}")
+                viewModel?.postScheduleSubjectEvent(i)
                 when(userData.typeUser){
                     TypeUser.PROFESSOR -> view.findNavController().navigate(R.id.action_homeFragment_to_professorViewPagerFragment)
                     TypeUser.STUDENT -> view.findNavController().navigate(R.id.action_homeFragment_to_studentViewPagerFragment)
                     else -> null
                 }
-
             }
+            timetable.
+
 
             viewModel?.user?.observe(viewLifecycleOwner, Observer {
                 viewModel?.showScheduleSubjects(IdDto(it.id!!))
@@ -72,6 +86,7 @@ class HomeFragment : Fragment() {
                 userType.text = mapUserType(userData.typeUser?.koName)
                 peptalk.text = mapPepTalk(userData.typeUser?.koName)
             })
+
             viewModel?.scheduleSubjectsResult?.observe(viewLifecycleOwner, Observer {
                 timetable.add(it)
             })
