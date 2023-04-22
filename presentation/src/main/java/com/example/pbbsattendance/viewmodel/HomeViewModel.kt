@@ -9,7 +9,7 @@ import com.example.domain.model.dto.IdDto
 import com.example.domain.usecases.GetUserUseCase
 import com.example.pbbsattendance.eventbus.ScheduleSubjectEvent
 import com.example.pbbsattendance.mapper.ScheduleMapper
-import com.github.tlaabs.timetableview.Schedule
+import com.islandparadise14.mintable.ScheduleEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
@@ -24,9 +24,9 @@ class HomeViewModel @Inject constructor(
     private val _user: MutableLiveData<UserModel> = MutableLiveData()
     val user: LiveData<UserModel> = _user
 
-    private var _scheduleSubjectsResult: MutableLiveData<ArrayList<Schedule>> = MutableLiveData()
-    val scheduleSubjectsResult: LiveData<ArrayList<Schedule>> = _scheduleSubjectsResult
-    private var scheduleArrayList = arrayListOf<Schedule>()
+    private var _scheduleSubjectsResult: MutableLiveData<ArrayList<ScheduleEntity>> = MutableLiveData()
+    val scheduleSubjectsResult: LiveData<ArrayList<ScheduleEntity>> = _scheduleSubjectsResult
+    private var scheduleArrayList = arrayListOf<ScheduleEntity>()
     private var scheduleSubjectArrayList = arrayListOf<ScheduleSubjectModel>()
     fun getUser(dto:IdDto){
         viewModelScope.launch {

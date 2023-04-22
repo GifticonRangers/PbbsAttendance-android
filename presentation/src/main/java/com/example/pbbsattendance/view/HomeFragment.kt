@@ -20,8 +20,8 @@ import com.example.pbbsattendance.databinding.FragmentHomeBinding
 import com.example.pbbsattendance.util.mapPepTalk
 import com.example.pbbsattendance.util.mapUserType
 import com.example.pbbsattendance.viewmodel.HomeViewModel
-import com.github.tlaabs.timetableview.Schedule
-import com.github.tlaabs.timetableview.Time
+import com.islandparadise14.mintable.OnScheduleClickListener
+import com.islandparadise14.mintable.ScheduleEntity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 
@@ -33,7 +33,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel by viewModels<HomeViewModel>()
     lateinit var userData: UserModel
-    private var scheduleList = arrayListOf<Schedule>()
+    private var scheduleList = arrayListOf<ScheduleEntity>()
+    private val day = arrayOf("Mon", "Tue", "Wen", "Thu", "Fri")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +50,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = this@HomeFragment.findNavController()
         binding.viewModel = homeViewModel
+        binding.timetable.initTable(day)
 
         binding.apply {
             viewModel?.getUser(IdDto(id=5))
@@ -56,28 +58,19 @@ class HomeFragment : Fragment() {
             icPlusSchedule.setOnClickListener {
                 view.findNavController().navigate(R.id.action_homeFragment_to_lectureAddFragment)
             }
-            icEditSchedule.setOnClickListener {
-                val schedule = Schedule()
-                schedule.startTime = Time(10,0)
-                schedule.endTime = Time(13,10)
-                schedule.classTitle = "세미나"
-                schedule.day = 1
-                scheduleList.add(schedule)
-                timetable.add(scheduleList)
-            }
-            timetable.setOnStickerSelectEventListener{ i: Int, schedules: ArrayList<Schedule> ->
-                Log.i("HomeFragment::i", i.toString())
-                Log.i("HomeFragment::", timetable.id.toString())
-                //Log.i("HomeFragment::info", "${schedules[i].classTitle}, ${schedules[i].classPlace}")
-                viewModel?.postScheduleSubjectEvent(i)
-                when(userData.typeUser){
-                    TypeUser.PROFESSOR -> view.findNavController().navigate(R.id.action_homeFragment_to_professorViewPagerFragment)
-                    TypeUser.STUDENT -> view.findNavController().navigate(R.id.action_homeFragment_to_studentViewPagerFragment)
-                    else -> null
+            timetable.setOnScheduleClickListener(
+                object :OnScheduleClickListener{
+                    override fun scheduleClicked(entity: ScheduleEntity) {
+                        Log.i("OnScheduleClickListener", "id:${entity.originId}, scheduleName:${entity.scheduleName}, roonInfo:${entity.roomInfo}")
+                        when(userData.typeUser){
+                            TypeUser.PROFESSOR -> view.findNavController().navigate(R.id.action_homeFragment_to_professorViewPagerFragment)
+                            TypeUser.STUDENT -> view.findNavController().navigate(R.id.action_homeFragment_to_studentViewPagerFragment)
+                            else -> null
+                        }
+                    }
                 }
-            }
-            timetable.
 
+            )
 
             viewModel?.user?.observe(viewLifecycleOwner, Observer {
                 viewModel?.showScheduleSubjects(IdDto(it.id!!))
@@ -88,7 +81,7 @@ class HomeFragment : Fragment() {
             })
 
             viewModel?.scheduleSubjectsResult?.observe(viewLifecycleOwner, Observer {
-                timetable.add(it)
+                timetable.updateSchedules(it)
             })
         }
     }
