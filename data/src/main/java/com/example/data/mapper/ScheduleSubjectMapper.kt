@@ -8,6 +8,7 @@ import com.example.domain.model.ScheduleSubjectModel
 object ScheduleSubjectMapper {
     fun mapperToScheduleSubject(scheduleSubjectResponse: ScheduleSubjectResponseDto): ScheduleSubjectModel{
         return ScheduleSubjectModel(
+            id = scheduleSubjectResponse.id,
             startHourSubject = getHour(scheduleSubjectResponse.startTimeSubject),
             startMinuteSubject = getMinute(scheduleSubjectResponse.startTimeSubject),
             endHourSubject = getHour(scheduleSubjectResponse.endTimeSubject),
