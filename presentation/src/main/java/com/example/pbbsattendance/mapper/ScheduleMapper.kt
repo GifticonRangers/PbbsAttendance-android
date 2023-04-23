@@ -1,6 +1,7 @@
 package com.example.pbbsattendance.mapper
 
 import com.example.domain.model.ScheduleSubjectModel
+import com.example.pbbsattendance.R
 import com.example.pbbsattendance.util.mapScheduleDay
 import com.islandparadise14.mintable.ScheduleEntity
 
@@ -14,6 +15,7 @@ object ScheduleMapper {
             scheduleDay = mapScheduleDay(scheduleSubjectModel.daySubject),
             roomInfo = scheduleSubjectModel.locationSubject?:"",
             scheduleName = scheduleSubjectModel.nameSubject?:"",
+            backgroundColor = "#6997EC"
         )
     }
 }
