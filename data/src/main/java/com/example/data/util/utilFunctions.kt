@@ -19,3 +19,5 @@ fun getMinute(text: String?):Int {
 
     return minute.toInt()
 }
+
+val INF = 1000000
