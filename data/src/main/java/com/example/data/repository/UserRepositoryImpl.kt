@@ -14,7 +14,7 @@ class UserRepositoryImpl @Inject constructor(
     private val dataSource: UserRemoteDataSource
 ):UserRepository {
     override suspend fun getUser(dto:IdDto): UserModel {
-        var result = UserModel(null,"",TypeUser.NULL,"","","","",GenderUser.FEMALE)
+        var result = UserModel(null,"",null,"","","","",GenderUser.FEMALE)
         dataSource.getUser(dto).suspendOnSuccess {
             result = UserMapper.mapperToUser(this.data)
         }
