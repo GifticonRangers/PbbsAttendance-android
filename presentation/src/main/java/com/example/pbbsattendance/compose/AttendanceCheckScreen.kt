@@ -41,7 +41,7 @@ fun AttendanceCheckScreen(
     ModalBottomSheetLayout(
         sheetState = state,
         sheetContent = {
-            LectureTimeModalContent(state)
+//            LectureTimeModalContent(state,data)
         },
     ) {
         Column(

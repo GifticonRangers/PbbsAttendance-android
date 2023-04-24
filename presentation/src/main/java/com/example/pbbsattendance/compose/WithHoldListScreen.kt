@@ -25,7 +25,7 @@ fun WithHoldListScreen(){
     ModalBottomSheetLayout(
         sheetState = state,
         sheetContent = {
-            LectureTimeModalContent(state)
+//            LectureTimeModalContent(state)
         },
     ) {
         Column(

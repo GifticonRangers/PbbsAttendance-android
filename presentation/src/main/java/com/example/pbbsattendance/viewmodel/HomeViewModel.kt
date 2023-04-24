@@ -8,6 +8,7 @@ import com.example.domain.model.UserModel
 import com.example.domain.model.dto.IdDto
 import com.example.domain.usecases.GetUserUseCase
 import com.example.pbbsattendance.eventbus.ScheduleSubjectEvent
+import com.example.pbbsattendance.eventbus.UserEvent
 import com.example.pbbsattendance.mapper.ScheduleMapper
 import com.islandparadise14.mintable.ScheduleEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -51,4 +52,7 @@ class HomeViewModel @Inject constructor(
         EventBus.getDefault().post(ScheduleSubjectEvent(data))
     }
 
+    fun postUserEvent(data:UserModel){
+        EventBus.getDefault().post(UserEvent(data))
+    }
 }

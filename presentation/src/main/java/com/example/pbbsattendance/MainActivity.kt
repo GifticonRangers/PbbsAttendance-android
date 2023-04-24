@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pbbsattendance.databinding.ActivityMainBinding
 import com.example.pbbsattendance.eventbus.ScheduleSubjectEvent
+import com.example.pbbsattendance.eventbus.UserEvent
 import com.example.pbbsattendance.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
@@ -31,6 +32,12 @@ class MainActivity : AppCompatActivity() {
     fun onScheduleSubject(event: ScheduleSubjectEvent){
         binding.viewmodel?.setScheduleSubject(event.scheduleSubject)
         Log.i("MainActivity::EventBusData","${event.scheduleSubject.scheduleName}, ${event.scheduleSubject.roomInfo},${event.scheduleSubject.originId}")
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    fun onUser(event: UserEvent){
+        binding.viewmodel?.setUser(event.user)
+        Log.i("MainActivity::EventBusData","nameUser:${event.user.nameUser}, id:${event.user.id}")
     }
 
     override fun onStart() {

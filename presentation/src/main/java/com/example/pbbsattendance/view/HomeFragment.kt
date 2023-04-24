@@ -72,6 +72,7 @@ class HomeFragment : Fragment() {
 
             viewModel?.user?.observe(viewLifecycleOwner, Observer {
                 viewModel?.showScheduleSubjects(IdDto(it.id!!))
+                viewModel?.postUserEvent(it)
                 userData = it
                 userName.text = userData.nameUser
                 userType.text = mapUserType(userData.typeUser?.koName)

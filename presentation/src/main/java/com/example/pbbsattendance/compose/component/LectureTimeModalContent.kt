@@ -17,12 +17,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pbbsattendance.R
+import com.example.pbbsattendance.model.LectureTimeItemModel
 import com.example.pbbsattendance.ui.theme.*
 import kotlinx.coroutines.launch
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun LectureTimeModalContent(modalState:ModalBottomSheetState){
+fun LectureTimeModalContent(modalState:ModalBottomSheetState, data:ArrayList<LectureTimeItemModel>){
     val scope = rememberCoroutineScope()
 
     Card(
@@ -50,9 +51,9 @@ fun LectureTimeModalContent(modalState:ModalBottomSheetState){
             }
             LazyColumn{
                 itemsIndexed(
-                    listOf("1차시", "2차시", "3차시")
+                    data
                 ){ index, item ->
-                    CourseItem(course = item, date = "23/01/19")
+                    LectureTimeItem(item.time, item.date)
                 }
             }
         }
@@ -61,7 +62,7 @@ fun LectureTimeModalContent(modalState:ModalBottomSheetState){
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CourseItem(course:String, date:String) {
+fun LectureTimeItem(time:String, date:String) {
     var cardColor by remember { mutableStateOf(Grey7) }
 
     Card(
@@ -75,7 +76,7 @@ fun CourseItem(course:String, date:String) {
                 .fillMaxWidth()
                 .padding(vertical = 20.dp, horizontal = 13.dp),
         ){
-            Text(text = course, modifier = Modifier.align(Alignment.Center), style = TextStyle(fontFamily = suit_medium, fontSize = 14.sp))
+            Text(text = time+"차시", modifier = Modifier.align(Alignment.Center), style = TextStyle(fontFamily = suit_medium, fontSize = 14.sp))
             Text(text = date, modifier = Modifier.align(Alignment.CenterEnd), style = TextStyle(fontFamily = suit_regular, fontSize = 8.sp))
         }
     }
@@ -85,6 +86,6 @@ fun CourseItem(course:String, date:String) {
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
 fun LectureTimeModalContentPreview(){
-    LectureTimeModalContent(modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden))
+    LectureTimeModalContent(modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden), data = arrayListOf())
 }
 
