@@ -1,9 +1,6 @@
 package com.example.data.di
 
-import com.example.data.api.LoginService
-import com.example.data.api.SubjectService
-import com.example.data.api.TokenService
-import com.example.data.api.UserService
+import com.example.data.api.*
 import com.example.data.repository.datasource.TokenLocalDataSource
 import com.example.data.repository.datasource.TokenLocalDataSourceImpl
 import com.google.gson.GsonBuilder
@@ -45,6 +42,12 @@ object ServiceModule {
     @Provides
     fun provideSubjectService(retrofit: Retrofit): SubjectService {
         return retrofit.create(SubjectService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAttendanceService(retrofit: Retrofit): AttendanceService {
+        return retrofit.create(AttendanceService::class.java)
     }
 
     @Singleton

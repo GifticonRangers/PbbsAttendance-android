@@ -1,8 +1,10 @@
 package com.example.data.di
 
+import com.example.data.repository.AttendanceRepositoryImpl
 import com.example.data.repository.LoginRepositoryImpl
 import com.example.data.repository.SubjectRepositoryImpl
 import com.example.data.repository.UserRepositoryImpl
+import com.example.domain.repository.AttendanceRepository
 import com.example.domain.repository.LoginRepository
 import com.example.domain.repository.SubjectRepository
 import com.example.domain.repository.UserRepository
@@ -27,4 +29,8 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun bindSubjectRepositoryImpl(repository: SubjectRepositoryImpl):SubjectRepository
+
+    @Binds
+    @Singleton
+    fun bindAttendanceRepositoryImpl(repository: AttendanceRepositoryImpl):AttendanceRepository
 }
