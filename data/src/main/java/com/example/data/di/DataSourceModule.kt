@@ -15,7 +15,7 @@ import javax.inject.Singleton
 interface DataSourceModule {
     @Binds
     @Singleton
-    fun bindUserDataSourceImpl(dataSource: UserRemoteDataSourceImpl): UserRemoteDataSource
+    fun bindUserDataSourceImpl(dataSourceImpl: UserRemoteDataSourceImpl): UserRemoteDataSource
 
     @Binds
     @Singleton

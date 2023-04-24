@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel by viewModels<HomeViewModel>()
     lateinit var userData: UserModel
-    private var scheduleList = arrayListOf<ScheduleEntity>()
     private val day = arrayOf("Mon", "Tue", "Wen", "Thu", "Fri")
 
     override fun onCreateView(
@@ -53,7 +52,7 @@ class HomeFragment : Fragment() {
         binding.timetable.initTable(day)
 
         binding.apply {
-            viewModel?.getUser(IdDto(id=5))
+            viewModel?.getUser()
 
             icPlusSchedule.setOnClickListener {
                 view.findNavController().navigate(R.id.action_homeFragment_to_lectureAddFragment)

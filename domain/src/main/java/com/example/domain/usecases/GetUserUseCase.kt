@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 class GetUserUseCase @Inject constructor( private val repository: UserRepository) {
-    suspend fun invoke(dto:IdDto): UserModel {
-        return repository.getUser(dto)
+    suspend fun invoke(): UserModel {
+        return repository.getUser()
     }
 }

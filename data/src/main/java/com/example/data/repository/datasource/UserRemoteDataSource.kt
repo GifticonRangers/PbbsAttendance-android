@@ -7,13 +7,13 @@ import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject
 
 interface UserRemoteDataSource {
-    suspend fun getUser(dto: IdDto): ApiResponse<UserResponseDto>
+    suspend fun getUser(): ApiResponse<UserResponseDto>
     suspend fun getUserBySubjectId(dto:IdDto): ApiResponse<ArrayList<UserResponseDto>>
 }
 
 class UserRemoteDataSourceImpl @Inject constructor(private val api: UserService) : UserRemoteDataSource{
-    override suspend fun getUser(dto: IdDto): ApiResponse<UserResponseDto> {
-        return api.getUser(dto)
+    override suspend fun getUser(): ApiResponse<UserResponseDto> {
+        return api.getUser()
     }
 
     override suspend fun getUserBySubjectId(dto: IdDto): ApiResponse<ArrayList<UserResponseDto>> {

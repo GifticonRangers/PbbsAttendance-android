@@ -7,8 +7,8 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface UserService {
-    @POST("/api/user/showUserByIdUser")
-    suspend fun getUser(@Body dto: IdDto): ApiResponse<UserResponseDto>
+    @POST("/api/user/showPersonalUser")
+    suspend fun getUser(): ApiResponse<UserResponseDto>
 
     @POST("/api/user/showUserBySubjectId")
     suspend fun getUserBySubjectId(@Body dto:IdDto):ApiResponse<ArrayList<UserResponseDto>>
