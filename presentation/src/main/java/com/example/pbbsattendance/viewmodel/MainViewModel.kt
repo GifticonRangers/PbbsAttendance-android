@@ -17,7 +17,7 @@ class MainViewModel(): ViewModel(){
             ""
         )
     }
-
+    /** 절대 MainActivity외의 View에서 사용하지 말것 */
     fun setScheduleSubject(data: ScheduleEntity){
         schduleSubject = data
     }
