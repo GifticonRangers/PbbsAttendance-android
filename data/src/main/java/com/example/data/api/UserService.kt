@@ -4,10 +4,11 @@ import com.example.data.dto.UserResponseDto
 import com.example.domain.model.dto.IdDto
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface UserService {
-    @POST("/api/user/showPersonalUser")
+    @GET("/api/user/showPersonalUser")
     suspend fun getUser(): ApiResponse<UserResponseDto>
 
     @POST("/api/user/showUserBySubjectId")
