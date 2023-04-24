@@ -13,22 +13,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.compose.component.LiveStatusView
 import com.example.pbbsattendance.compose.component.StudentCountAndLectureTimeBar
 import com.example.pbbsattendance.ui.theme.*
+import com.example.pbbsattendance.viewmodel.MainViewModel
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun AfterStartAttendanceManageScreen(navController: NavController) {
+fun AfterStartAttendanceManageScreen(
+    navController: NavController,
+    viewModel: MainViewModel = hiltViewModel()
+) {
+    val scheduleSubject = viewModel.getScheduleSubject()
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+
+
 
     ModalBottomSheetLayout(
         sheetState = state,
@@ -42,7 +51,7 @@ fun AfterStartAttendanceManageScreen(navController: NavController) {
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LectureTitle(title = "물류의 이해")
+            LectureTitle(title = scheduleSubject.scheduleName)
             LiveStatusView(Blue3, Grey4)
             Button(
                 onClick = { navController.navigate(route = Screen.BeforeStartAttendanceManage.route) },

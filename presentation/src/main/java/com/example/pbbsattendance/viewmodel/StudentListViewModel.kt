@@ -17,7 +17,7 @@ class StudentListViewModel @Inject constructor(
     fun getStudentList(dto:IdDto):ArrayList<UserModel>{
         val result = arrayListOf<UserModel>()
         viewModelScope.launch {
-            //result.addAll(getStudentListUseCase.invoke(dto))
+            result.addAll(getStudentListUseCase.invoke(dto))
         }
         return result
     }
