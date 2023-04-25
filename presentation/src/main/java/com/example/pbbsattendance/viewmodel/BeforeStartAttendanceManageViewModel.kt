@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AfterStartAttendanceManageViewModel @Inject constructor(
+class BeforeStartAttendanceManageViewModel @Inject constructor(
     private val getAttendanceDateListUseCase: GetAttendanceDateListUseCase,
     private val getStudentListUseCase: GetStudentListUseCase
 ): ViewModel(){
