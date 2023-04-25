@@ -10,10 +10,12 @@ import com.example.domain.model.dto.IdDto
 import com.example.domain.model.dto.UserSubjectDto
 import com.example.domain.usecases.GetAttendanceDateListUseCase
 import com.example.domain.usecases.GetStudentListUseCase
+import com.example.pbbsattendance.eventbus.LectureTimeItemEvent
 import com.example.pbbsattendance.mapper.LectureMapper
 import com.example.pbbsattendance.model.LectureTimeItemModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 @HiltViewModel
@@ -42,6 +44,10 @@ class BeforeStartAttendanceManageViewModel @Inject constructor(
                 _studentList.value = it
             }
         }
+    }
+
+    fun postLectureTimeItemEvent(data:LectureTimeItemModel){
+        EventBus.getDefault().post(LectureTimeItemEvent(data))
     }
 
     fun onStart() {

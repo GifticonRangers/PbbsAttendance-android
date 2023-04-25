@@ -1,5 +1,6 @@
 package com.example.pbbsattendance.compose
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,17 +24,16 @@ import com.example.domain.model.dto.UserSubjectDto
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.model.LectureTimeItemModel
 import com.example.pbbsattendance.ui.theme.*
-import com.example.pbbsattendance.viewmodel.AfterStartAttendanceManageViewModel
+import com.example.pbbsattendance.viewmodel.BeforeStartAttendanceManageViewModel
 import com.example.pbbsattendance.viewmodel.MainViewModel
 import com.islandparadise14.mintable.ScheduleEntity
 import kotlinx.coroutines.launch
-
 
 @Composable
 fun BeforeStartAttendanceManageScreen(
     navController: NavController,
     mainViewModel: MainViewModel = hiltViewModel(),
-    afterStartAttendanceManageViewModel: AfterStartAttendanceManageViewModel = hiltViewModel(),
+    afterStartAttendanceManageViewModel: BeforeStartAttendanceManageViewModel = hiltViewModel(),
 ) {
     val scheduleSubject = mainViewModel.getScheduleSubject()
     val user = mainViewModel.getUser()
@@ -41,9 +41,13 @@ fun BeforeStartAttendanceManageScreen(
     afterStartAttendanceManageViewModel.getStudentList(IdDto(scheduleSubject.originId))
 
     val dateList by afterStartAttendanceManageViewModel.dateList.observeAsState(initial = emptyList())
-    BeforeStartAttendanceManageScreen(dateList = dateList, scheduleSubject = scheduleSubject, onStartAttendance = {navController.navigate(route = Screen.AfterStartAttendanceManage.route)})
-
-
+    BeforeStartAttendanceManageScreen(
+        dateList = dateList,
+        scheduleSubject = scheduleSubject,
+        onStartAttendance = {
+            navController.navigate(route = Screen.AfterStartAttendanceManage.route)
+        }
+    )
 }
 
 @Composable
@@ -51,11 +55,17 @@ fun BeforeStartAttendanceManageScreen(
 fun BeforeStartAttendanceManageScreen(dateList:List<LectureTimeItemModel>, scheduleSubject: ScheduleEntity, onStartAttendance:()->Unit = {}){
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
+    val onLectureTimeItemSelected = { index:Int ->
+        /*선택된 차시에 대한 내용을 MainViewModel로 넘기고 다음단계로 넘어가면 된다*/
+        Log.i("BeforeStartAttendanceManageScreen","선택된 정보:${dateList[index]}")
+
+        onStartAttendance()
+    }
 
     ModalBottomSheetLayout(
         sheetState = state,
         sheetContent = {
-            LectureTimeModalContent(state,dateList)
+            LectureTimeModalContent(state,dateList,{ index-> onLectureTimeItemSelected(index) })
         },
     ) {
         Column(
@@ -96,6 +106,7 @@ fun BeforeStartAttendanceManageScreen(dateList:List<LectureTimeItemModel>, sched
         }
     }
 }
+
 //@Preview
 //@Composable
 //private fun BeforeStartAttendanceManagePreview(){

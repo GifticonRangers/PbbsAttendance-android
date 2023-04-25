@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pbbsattendance.databinding.ActivityMainBinding
+import com.example.pbbsattendance.eventbus.LectureTimeItemEvent
 import com.example.pbbsattendance.eventbus.ScheduleSubjectEvent
 import com.example.pbbsattendance.eventbus.UserEvent
 import com.example.pbbsattendance.viewmodel.MainViewModel
@@ -38,6 +39,12 @@ class MainActivity : AppCompatActivity() {
     fun onUser(event: UserEvent){
         binding.viewmodel?.setUser(event.user)
         Log.i("MainActivity::EventBusData","nameUser:${event.user.nameUser}, id:${event.user.id}")
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    fun onLectureTimeItem(event: LectureTimeItemEvent){
+        binding.viewmodel?.setLectureTimeItem(event.lectureTimeItem)
+        Log.i("MainActivity::EventBusData","lectureTimeItem.timer:${event.lectureTimeItem.time}, lectureTimeItem.date:${event.lectureTimeItem.date}")
     }
 
     override fun onStart() {
