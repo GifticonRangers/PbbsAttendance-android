@@ -21,22 +21,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.domain.model.AttendanceTotalModel
+import com.example.domain.model.UserModel
 import com.example.pbbsattendance.ui.theme.*
 
 @Composable
-fun LiveStatusView(color1:Color, color2:Color) {
+fun LiveStatusView(color1:Color, color2:Color, data:AttendanceTotalModel) {
     Row(
         modifier = Modifier.padding(top=20.dp)
     ) {
-        RoundLiveCard(number = 18, text = "출석", color = color1)
-        RoundLiveCard(number = 6, text = "결석", color = color2)
+        RoundLiveCard(number = data.attendance!!, text = "출석", color = color1)
+        RoundLiveCard(number = data.absence!!, text = "결석", color = color2)
     }
     Row(
         modifier = Modifier.padding(top=20.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        ProgressCircle(number = 0, title = "공결")
-        ProgressCircle(number = 0, title = "지각")
+        ProgressCircle(number = data.public_ABSENCE!!, title = "공결")
+        ProgressCircle(number = data.late!!, title = "지각")
     }
 }
 
@@ -100,5 +102,5 @@ fun ProgressCircle(number: Int, title: String){
 @Preview
 @Composable
 fun LiveStatusViewPreview() {
-    LiveStatusView(Blue3, Grey4)
+    LiveStatusView(Blue3, Grey4,AttendanceTotalModel(0,1,2,3))
 }
