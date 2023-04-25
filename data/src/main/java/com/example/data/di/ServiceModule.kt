@@ -54,7 +54,7 @@ object ServiceModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit{
         return Retrofit.Builder()
-            .baseUrl("http://52.78.185.171:8080")
+            .baseUrl("http://13.209.5.91:8080")
             .client(okHttpClient)
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
