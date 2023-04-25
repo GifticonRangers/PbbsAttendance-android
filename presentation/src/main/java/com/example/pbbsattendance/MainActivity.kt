@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     fun onLectureTimeItem(event: LectureTimeItemEvent){
         binding.viewmodel?.setLectureTimeItem(event.lectureTimeItem)
-        Log.i("MainActivity::EventBusData","lectureTimeItem.timer:${event.lectureTimeItem.time}, lectureTimeItem.date:${event.lectureTimeItem.date}")
+        Log.i("MainActivity::EventBusData","lectureTimeItem.week:${event.lectureTimeItem.week}, lectureTimeItem.timer:${event.lectureTimeItem.time}, lectureTimeItem.date:${event.lectureTimeItem.date}")
     }
 
     override fun onStart() {

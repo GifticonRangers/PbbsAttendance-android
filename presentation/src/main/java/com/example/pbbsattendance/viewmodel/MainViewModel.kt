@@ -31,7 +31,7 @@ class MainViewModel(): ViewModel(){
             "",
             GenderUser.NULL
         )
-        private var lectureTimeItem = LectureTimeItemModel("","")
+        private var lectureTimeItem = LectureTimeItemModel("","","")
     }
     /** 절대 MainActivity외의 View에서 사용하지 말것 */
     fun setScheduleSubject(data: ScheduleEntity){
