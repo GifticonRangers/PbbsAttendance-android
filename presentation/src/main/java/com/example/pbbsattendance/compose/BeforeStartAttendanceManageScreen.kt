@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.domain.model.dto.IdDto
 import com.example.domain.model.dto.UserSubjectDto
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.model.LectureTimeItemModel
@@ -33,14 +32,13 @@ import kotlinx.coroutines.launch
 fun BeforeStartAttendanceManageScreen(
     navController: NavController,
     mainViewModel: MainViewModel = hiltViewModel(),
-    afterStartAttendanceManageViewModel: BeforeStartAttendanceManageViewModel = hiltViewModel(),
+    beforeStartAttendanceManageViewModel: BeforeStartAttendanceManageViewModel = hiltViewModel(),
 ) {
     val scheduleSubject = mainViewModel.getScheduleSubject()
     val user = mainViewModel.getUser()
-    afterStartAttendanceManageViewModel.getAttendanceDateList(UserSubjectDto(user.id,scheduleSubject.originId))
-    afterStartAttendanceManageViewModel.getStudentList(IdDto(scheduleSubject.originId))
+    beforeStartAttendanceManageViewModel.getAttendanceDateList(UserSubjectDto(user.id,scheduleSubject.originId))
 
-    val dateList by afterStartAttendanceManageViewModel.dateList.observeAsState(initial = emptyList())
+    val dateList by beforeStartAttendanceManageViewModel.dateList.observeAsState(initial = emptyList())
     BeforeStartAttendanceManageScreen(
         dateList = dateList,
         scheduleSubject = scheduleSubject,
