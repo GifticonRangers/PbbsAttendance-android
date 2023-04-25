@@ -8,5 +8,6 @@ import retrofit2.http.POST
 
 interface AttendanceService {
     @POST("/api/attendance/showAttendanceTimeList")
-    suspend fun showAttendanceInfo(@Body dto:UserSubjectDto):ApiResponse<ArrayList<AttendanceDateResponseDto>>
+    suspend fun showAttendanceTimeList(@Body dto:UserSubjectDto):ApiResponse<ArrayList<AttendanceDateResponseDto>>
+
 }
