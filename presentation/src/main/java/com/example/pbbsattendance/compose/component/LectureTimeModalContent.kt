@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun LectureTimeModalContent(modalState:ModalBottomSheetState, data:ArrayList<LectureTimeItemModel>){
+fun LectureTimeModalContent(modalState:ModalBottomSheetState, data:List<LectureTimeItemModel>){
     val scope = rememberCoroutineScope()
 
     Card(
@@ -86,6 +86,12 @@ fun LectureTimeItem(time:String, date:String) {
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
 fun LectureTimeModalContentPreview(){
-    LectureTimeModalContent(modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden), data = arrayListOf())
+    LectureTimeModalContent(modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden),
+        listOf(
+            LectureTimeItemModel("1","23/04/25"),
+            LectureTimeItemModel("2","23/04/25"),
+            LectureTimeItemModel("3","23/04/25")
+        )
+    )
 }
 

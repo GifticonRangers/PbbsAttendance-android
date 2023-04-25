@@ -1,12 +1,15 @@
 package com.example.pbbsattendance.compose
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
@@ -20,30 +23,51 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.domain.model.UserModel
+import com.example.domain.model.dto.IdDto
 import com.example.domain.model.dto.UserSubjectDto
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.compose.component.LiveStatusView
 import com.example.pbbsattendance.compose.component.StudentCountAndLectureTimeBar
+import com.example.pbbsattendance.model.LectureTimeItemModel
 import com.example.pbbsattendance.ui.theme.*
 import com.example.pbbsattendance.viewmodel.AfterStartAttendanceManageViewModel
 import com.example.pbbsattendance.viewmodel.MainViewModel
+import com.islandparadise14.mintable.ScheduleEntity
+import kotlinx.coroutines.launch
 
 @Composable
-@OptIn(ExperimentalMaterialApi::class)
 fun AfterStartAttendanceManageScreen(
     navController: NavController,
     mainViewModel: MainViewModel = hiltViewModel(),
-    afterStartAttendanceManageViewModel: AfterStartAttendanceManageViewModel = hiltViewModel()
+    afterStartAttendanceManageViewModel: AfterStartAttendanceManageViewModel = hiltViewModel(),
 ) {
     val scheduleSubject = mainViewModel.getScheduleSubject()
     val user = mainViewModel.getUser()
-    val dateList = afterStartAttendanceManageViewModel.getAttendanceDateList(UserSubjectDto(user.id!!, scheduleSubject.originId))
-    val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
+    afterStartAttendanceManageViewModel.getAttendanceDateList(UserSubjectDto(user.id,scheduleSubject.originId))
+    afterStartAttendanceManageViewModel.getStudentList(IdDto(scheduleSubject.originId))
+
+    val dateList by afterStartAttendanceManageViewModel.dateList.observeAsState(initial = emptyList())
+    val studentList by afterStartAttendanceManageViewModel.studentList.observeAsState(initial = emptyList())
+
+    AfterStartAttendanceManageScreen(
+        dateList = dateList,
+        studentList = studentList,
+        scheduleSubject = scheduleSubject,
+        onStartAttendance = {navController.navigate(route = Screen.BeforeStartAttendanceManage.route)}
+    )
+
+}
+
+@Composable
+@OptIn(ExperimentalMaterialApi::class)
+fun AfterStartAttendanceManageScreen(dateList:List<LectureTimeItemModel>, studentList:List<UserModel>,scheduleSubject:ScheduleEntity, onStartAttendance:()->Unit = {}){
+    val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     ModalBottomSheetLayout(
         sheetState = state,
         sheetContent = {
-            LectureTimeModalContent(state, dateList)
+            LectureTimeModalContent(state,dateList)
         },
     ) {
         Column(
@@ -55,7 +79,7 @@ fun AfterStartAttendanceManageScreen(
             LectureTitle(title = scheduleSubject.scheduleName)
             LiveStatusView(Blue3, Grey4)
             Button(
-                onClick = { navController.navigate(route = Screen.BeforeStartAttendanceManage.route) },
+                onClick = { onStartAttendance() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Grey4),
                 border = BorderStroke(1.dp, Blue3),
                 shape = RoundedCornerShape(12.dp),
@@ -80,29 +104,17 @@ fun AfterStartAttendanceManageScreen(
             ){}
             StudentCountAndLectureTimeBar(course = 1, modalState = state)
             LazyColumn {
-//                studentListStateContent?.let {
-//                    itemsIndexed(
-//                        it.content
-//                    ) { index, item ->
-//                        StudentCard(data = item)
-//                    }
-//                }
-//                itemsIndexed(
-//                    arrayOf(
-////                        Student(name = "이영지", studentId = "202011111", attendanceState = "출석"),
-////                        Student(name = "스누피", studentId = "201822222", attendanceState = "출석"),
-////                        Student(name = "류승룡", studentId = "201133333", attendanceState = "미출석")
-//                    )
-//                ) { index, item ->
-//                    StudentCard(data = item)
-//                }
+                itemsIndexed(
+                    dateList
+                ) { index, item ->
+                    Text(text = "모르게따")
+                }
             }
         }
     }
 }
-
-@Preview
-@Composable
-fun AfterStartAttendanceManagePreview() {
-    AfterStartAttendanceManageScreen(navController = rememberNavController())
-}
+//@Preview
+//@Composable
+//fun AfterStartAttendanceManagePreview() {
+//    AfterStartAttendanceManageScreen(navController = rememberNavController())
+//}
