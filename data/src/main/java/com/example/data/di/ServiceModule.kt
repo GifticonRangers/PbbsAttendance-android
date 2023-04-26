@@ -1,5 +1,6 @@
 package com.example.data.di
 
+import android.util.Log
 import com.example.data.api.*
 import com.example.data.repository.datasource.TokenLocalDataSource
 import com.example.data.repository.datasource.TokenLocalDataSourceImpl
@@ -54,7 +55,7 @@ object ServiceModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient):Retrofit{
         return Retrofit.Builder()
-            .baseUrl("http://13.209.5.91:8080")
+            .baseUrl("http://3.34.91.237:8080")
             .client(okHttpClient)
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
@@ -68,7 +69,6 @@ object ServiceModule {
         okHttpClientBuilder.connectTimeout(60, TimeUnit.SECONDS)
         okHttpClientBuilder.readTimeout(60, TimeUnit.SECONDS)
         okHttpClientBuilder.addInterceptor(headerInterceptor)
-
         return okHttpClientBuilder.build()
     }
 
