@@ -1,5 +1,7 @@
 package com.example.pbbsattendance.compose
 
+import android.util.Log
+import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pbbsattendance.R
@@ -87,21 +90,14 @@ fun LectureTimeItem(data:LectureTimeItemModel, index:Int, onClick:(Int) -> Unit)
                 .padding(vertical = 20.dp, horizontal = 13.dp),
         ){
             Text(text = data.time+"차시", modifier = Modifier.align(Alignment.Center), style = TextStyle(fontFamily = suit_medium, fontSize = 14.sp))
-            Text(text = data.date, modifier = Modifier.align(Alignment.CenterEnd), style = TextStyle(fontFamily = suit_regular, fontSize = 8.sp))
+            Text(text = data.date, modifier = Modifier.align(Alignment.CenterEnd), style = TextStyle(fontFamily = suit_regular, fontSize = 14.sp))
         }
     }
 }
 
-//@Preview
-//@Composable
-//@OptIn(ExperimentalMaterialApi::class)
-//fun LectureTimeModalContentPreview(){
-//    LectureTimeModalContent(modalState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden),
-//        listOf(
-//            LectureTimeItemModel("1","23/04/25"),
-//            LectureTimeItemModel("2","23/04/25"),
-//            LectureTimeItemModel("3","23/04/25")
-//        ),
-//    )
-//}
+@Preview
+@Composable
+fun LectureTimeItemPreview(){
+    LectureTimeItem(data = LectureTimeItemModel("1", "23/04/30", "3"), index = 0, onClick = { index -> })
+}
 

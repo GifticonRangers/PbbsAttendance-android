@@ -36,8 +36,8 @@ fun StudentCard(data: UserModel){
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(painter = painterResource(id = R.drawable.ic_student), contentDescription = "")
-            Text(text = data.nameUser?:"", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp)  )
-            Text(text = data.idUser?:"", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 10.sp), color = Grey2, modifier = Modifier.padding(start=5.dp) )
+            Text(text = data.nameUser, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp)  )
+            Text(text = data.idUser, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 10.sp), color = Grey2, modifier = Modifier.padding(start=5.dp) )
         }
     }
 }
