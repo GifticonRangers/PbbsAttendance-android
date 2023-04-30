@@ -1,0 +1,46 @@
+package com.example.pbbsattendance.viewmodel
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.domain.model.AttendanceTotalModel
+import com.example.domain.model.dto.UserSubjectDto
+import com.example.domain.usecases.GetAttendanceDateListUseCase
+import com.example.domain.usecases.GetAttendanceTotalInfoUseCase
+import com.example.pbbsattendance.mapper.LectureMapper
+import com.example.pbbsattendance.model.LectureTimeItemModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class WithHoldListViewModel @Inject constructor(
+    private val getAttendanceTotalInfoUseCase: GetAttendanceTotalInfoUseCase,
+    private val getAttendanceDateListUseCase: GetAttendanceDateListUseCase
+): ViewModel(){
+    private val _attendanceTotal: MutableLiveData<AttendanceTotalModel> = MutableLiveData()
+    val attendanceTotal: LiveData<AttendanceTotalModel> = _attendanceTotal
+    private var _dateList: MutableLiveData<List<LectureTimeItemModel>> = MutableLiveData()
+    val dateList : LiveData<List<LectureTimeItemModel>> get() = _dateList
+    private var _selectedDate: MutableLiveData<LectureTimeItemModel> = MutableLiveData()
+    val selectedDate: LiveData<LectureTimeItemModel> get() = _selectedDate
+
+    fun getAttendanceTotalInfo(lectureTimeItemModel: LectureTimeItemModel, idSubject:Int){
+        val dto = LectureMapper.mapToLectureInfoDto(lectureTimeItemModel, idSubject)
+        _selectedDate.value = lectureTimeItemModel
+        viewModelScope.launch {
+            _attendanceTotal.value = getAttendanceTotalInfoUseCase.invoke(dto)
+        }
+    }
+
+    fun getAttendanceDateList(dto: UserSubjectDto){
+        val result = arrayListOf<LectureTimeItemModel>()
+        viewModelScope.launch{
+            getAttendanceDateListUseCase.invoke(dto).forEach {
+                result.add(LectureMapper.mapperToLectureDate(it))
+            }
+            _dateList.value = result
+        }
+    }
+}

@@ -1,31 +1,77 @@
 package com.example.pbbsattendance.compose.component
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.domain.model.AttendanceTotalModel
+import com.example.domain.model.dto.UserSubjectDto
+import com.example.pbbsattendance.R
 import com.example.pbbsattendance.compose.LectureTimeModalContent
+import com.example.pbbsattendance.model.LectureTimeItemModel
 import com.example.pbbsattendance.ui.theme.Blue3
+import com.example.pbbsattendance.ui.theme.Grey
 import com.example.pbbsattendance.ui.theme.Grey4
+import com.example.pbbsattendance.ui.theme.suit_regular
+import com.example.pbbsattendance.viewmodel.MainViewModel
+import com.example.pbbsattendance.viewmodel.WithHoldListViewModel
+import com.islandparadise14.mintable.ScheduleEntity
+import kotlinx.coroutines.launch
+
+@Composable
+fun WithHoldListScreen(
+    mainViewModel: MainViewModel = hiltViewModel(),
+    withHoldListViewModel: WithHoldListViewModel = hiltViewModel()
+){
+    val scheduleSubject = mainViewModel.getScheduleSubject()
+    val lectureTimeItem = mainViewModel.getLectureTimeItem()
+    val user = mainViewModel.getUser()
+
+    withHoldListViewModel.getAttendanceTotalInfo(lectureTimeItem,scheduleSubject.originId)
+    withHoldListViewModel.getAttendanceDateList(UserSubjectDto(idUser = user.id, idSubject = scheduleSubject.originId))
+    val attendanceTotal by withHoldListViewModel.attendanceTotal.observeAsState(AttendanceTotalModel(0,0,0,0))
+    val dateList by withHoldListViewModel.dateList.observeAsState(initial = emptyList())
+    //리컴포지션이 될때 계속 초기화가 되는 게 문제
+    WithHoldListScreen(
+        attendanceTotal = attendanceTotal,
+        dateList = dateList,
+        scheduleSubject = scheduleSubject,
+        onGetSelectedAttendance = { index ->
+            withHoldListViewModel.getAttendanceTotalInfo(dateList[index],scheduleSubject.originId)
+        },
+        selectedDate = lectureTimeItem
+    )
+}
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun WithHoldListScreen(){
+fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<LectureTimeItemModel>,scheduleSubject:ScheduleEntity, onGetSelectedAttendance:(Int)->Unit = {}, selectedDate:LectureTimeItemModel){
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    val scope = rememberCoroutineScope()
+    var date by remember{
+        mutableStateOf(selectedDate)
+    }
+    val onLectureTimeItemSelected = {index:Int ->
+        onGetSelectedAttendance(index)
+        date = dateList[index]
+    }
 
     ModalBottomSheetLayout(
         sheetState = state,
         sheetContent = {
-//            LectureTimeModalContent(state)
+            LectureTimeModalContent(state,dateList,{ index-> onLectureTimeItemSelected(index) })
         },
     ) {
         Column(
@@ -34,40 +80,35 @@ fun WithHoldListScreen(){
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LectureTitle(title = "물류의 이해")
-            LiveStatusView(Grey4, Blue3)
+            LectureTitle(title = scheduleSubject.scheduleName)
+            LiveStatusView(Grey4, Blue3, attendanceTotal)
             Row(
                 Modifier
-                    .padding(top = 20.dp)
                     .fillMaxWidth()
-                    .drawBehind {
-                        drawLine(
-                            color = Grey4,
-                            start = Offset(0f, size.height),
-                            end = Offset(size.width, size.height),
-                            strokeWidth = 10f
+                    .padding(vertical = 10.dp)
+                    .padding(start = 10.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(){
+                    Text(text = "학생",style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                    Text(text = "n",style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Blue3, modifier = Modifier.padding(start=5.dp))
+                }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    Text(text = date.week + "주차" ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                    Text(text = date.time + "차시" ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                    Text(text = date.date ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                    IconButton(onClick = { scope.launch { state.show() }}) {
+                        Icon(
+                            painterResource(id = R.drawable.ic_more),
+                            contentDescription = null
                         )
                     }
-            ){}
-            StudentCountAndLectureTimeBar(course = 1, modalState = state)
-            LazyColumn {
-//                studentListStateContent?.let {
-//                    itemsIndexed(
-//                        it.content
-//                    ) { index, item ->
-//                        StudentCard(data = item)
-//                    }
-//                }
-//                itemsIndexed(
-//                    arrayOf(
-//                        Student(name = "이영지", studentId = "202011111", attendanceState = "출석"),
-//                        Student(name = "스누피", studentId = "201822222", attendanceState = "출석"),
-//                        Student(name = "류승룡", studentId = "201133333", attendanceState = "미출석")
-//                    )
-//                ) { index, item ->
-//                    StudentCard(data = item)
-//                }
+                }
             }
+
         }
     }
 }
@@ -75,5 +116,10 @@ fun WithHoldListScreen(){
 @Preview
 @Composable
 fun WithHoldListScreenPreview() {
-    WithHoldListScreen()
+    WithHoldListScreen(
+        AttendanceTotalModel(attendance = 0, late = 0, absence = 0, public_ABSENCE = 0),
+        dateList = listOf(LectureTimeItemModel(time="1", date = "23/04/30",week="9")),
+        scheduleSubject = ScheduleEntity(originId = 0, scheduleDay = 30, scheduleName = "캡스톤디자인(2)", roomInfo = "505호", startTime = "10:00", endTime = "11:50"),
+        selectedDate = LectureTimeItemModel(time="1", date = "23/04/30",week="9")
+    )
 }
