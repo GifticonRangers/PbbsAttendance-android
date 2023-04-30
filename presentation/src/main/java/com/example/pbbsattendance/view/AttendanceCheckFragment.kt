@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import com.example.pbbsattendance.compose.AttendanceCheckScreen
-import com.example.pbbsattendance.ui.theme.PbbsAttendanceTheme
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.pbbsattendance.compose.BeforeTagNfcScreen
+import com.example.pbbsattendance.compose.SetUpNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AttendanceCheckFragment: Fragment() {
+
+    lateinit var navHostController: NavHostController
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,7 +26,8 @@ class AttendanceCheckFragment: Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                AttendanceCheckScreen()
+                navHostController = rememberNavController()
+                SetUpNavGraph(navController = navHostController)
             }
         }
     }

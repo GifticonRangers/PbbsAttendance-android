@@ -16,5 +16,11 @@ fun SetUpNavGraph(
         composable(route = Screen.AfterStartAttendanceManage.route){
             AfterStartAttendanceManageScreen(navController = navController)
         }
+        composable(route = Screen.BeforeTagNfc.route){
+            BeforeTagNfcScreen(navController = navController)
+        }
+        composable(route = Screen.AfterTagNfc.route){
+            AfterTagNfcScreen(navController = navController)
+        }
     }
 }

@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.domain.model.dto.UserSubjectDto
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.compose.component.LectureTitle
@@ -29,7 +30,8 @@ import com.islandparadise14.mintable.ScheduleEntity
 import kotlinx.coroutines.launch
 
 @Composable
-fun AttendanceCheckScreen(
+fun BeforeTagNfcScreen(
+    navController: NavController,
     mainViewModel: MainViewModel = hiltViewModel(),
     attendanceCheckViewModel: BeforeTagNfcViewModel = hiltViewModel()
 ){
@@ -38,12 +40,12 @@ fun AttendanceCheckScreen(
     attendanceCheckViewModel.getAttendanceDateList(UserSubjectDto(user.id,scheduleSubject.originId))
 
     val dateList by attendanceCheckViewModel.dateList.observeAsState(initial = emptyList())
-    AttendanceCheckScreen(
+    BeforeTagNfcScreen(
         dateList,
         scheduleSubject,
         onStartAttendance = {
             mainViewModel.setLectureTimeItem(it)
-            //DoingCheckScreen으로 이동
+            navController.navigate(route = Screen.AfterTagNfc.route)
         }
     )
 
@@ -51,7 +53,7 @@ fun AttendanceCheckScreen(
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun AttendanceCheckScreen(dateList:List<LectureTimeItemModel>,scheduleSubject: ScheduleEntity, onStartAttendance:(LectureTimeItemModel)->Unit = {}) {
+fun BeforeTagNfcScreen(dateList:List<LectureTimeItemModel>, scheduleSubject: ScheduleEntity, onStartAttendance:(LectureTimeItemModel)->Unit = {}) {
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     var isLectureTimeSelected by remember {
         mutableStateOf(false)
@@ -122,5 +124,8 @@ fun AttendanceCheckScreen(dateList:List<LectureTimeItemModel>,scheduleSubject: S
 @Preview
 @Composable
 private fun AttendanceCheckPreview(){
-    AttendanceCheckScreen()
+    BeforeTagNfcScreen(
+        dateList = listOf(LectureTimeItemModel(time="1", date = "23/04/30",week="9")),
+        scheduleSubject = ScheduleEntity(originId = 0, scheduleDay = 30, scheduleName = "캡스톤디자인(2)", roomInfo = "505호", startTime = "10:00", endTime = "11:50")
+    )
 }
