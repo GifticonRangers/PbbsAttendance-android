@@ -79,34 +79,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-
-        val detectedTag:Tag? = intent?.getParcelableExtra(NfcAdapter.EXTRA_TAG)
-        //nfc payload 쓰기
-        val writeValue = "20"
-        val message:NdefMessage = createTagMessage(writeValue)
-        writeTag(message, detectedTag!!)
-
-        if (intent?.action == NfcAdapter.ACTION_NDEF_DISCOVERED){
-            //nfc payload 읽기
-            val messages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
-            if (messages == null){
-                return
-            }
-            for (i in messages.indices) {
-                val result = readMsg(messages[i] as NdefMessage)
-                Log.i("MainActivity.readMsg.result::-----------------------------------------------------------------",result);
-            }
-        }
-
-//        if(NfcAdapter.ACTION_TAG_DISCOVERED == intent?.action){
-//            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-//                val tag = intent?.getParcelableExtra(NfcAdapter.EXTRA_TAG, MainActivity::class.java)
-//                Log.i("nfc_discovered-----------------------------", )
-//            }
-//            else{
-//                val tag = intent?.getBooleanArrayExtra(NfcAdapter.EXTRA_TAG)
-//                Log.i("nfc_discovered----sdkInt less than tiramisu version----", tag.contentToString())
-//            }
+            /**admin페이지로 기능 분리 성공하기 전까지 keep*/
+//        val detectedTag:Tag? = intent?.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+//        //nfc payload 쓰기
+//        val writeValue = "19"
+//        val message:NdefMessage = createTagMessage(writeValue)
+//        writeTag(message, detectedTag!!)
+//
+//        //nfc payload 읽기
+//        val messages = intent?.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+//        if (messages == null){
+//            Log.i("MainActivity.readMsg.result::-----------------------------------------------------------------","Empty messages");
+//            return
+//        }
+//        for (i in messages.indices) {
+//            val result = readMsg(messages[i] as NdefMessage)
+//            Log.i("MainActivity.readMsg.result::-----------------------------------------------------------------",result);
 //        }
     }
 
