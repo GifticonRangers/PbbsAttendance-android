@@ -1,6 +1,5 @@
 package com.example.pbbsattendance.compose
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -42,7 +41,8 @@ fun BeforeStartAttendanceManageScreen(
     BeforeStartAttendanceManageScreen(
         dateList = dateList,
         scheduleSubject = scheduleSubject,
-        onStartAttendance = {
+        onStartAttendance = { index ->
+            mainViewModel.setLectureTimeItem(dateList[index])
             navController.navigate(route = Screen.AfterStartAttendanceManage.route)
         }
     )
@@ -50,14 +50,11 @@ fun BeforeStartAttendanceManageScreen(
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun BeforeStartAttendanceManageScreen(dateList:List<LectureTimeItemModel>, scheduleSubject: ScheduleEntity, onStartAttendance:()->Unit = {}){
+fun BeforeStartAttendanceManageScreen(dateList:List<LectureTimeItemModel>, scheduleSubject: ScheduleEntity, onStartAttendance:(Int)->Unit = {}){
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val onLectureTimeItemSelected = { index:Int ->
-        /*선택된 차시에 대한 내용을 MainViewModel로 넘기고 다음단계로 넘어가면 된다*/
-        Log.i("BeforeStartAttendanceManageScreen","선택된 정보:${dateList[index]}")
-
-        onStartAttendance()
+        onStartAttendance(index)
     }
 
     ModalBottomSheetLayout(

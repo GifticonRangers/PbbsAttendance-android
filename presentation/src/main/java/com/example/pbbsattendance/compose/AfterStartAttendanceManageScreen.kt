@@ -22,6 +22,7 @@ import com.example.domain.model.AttendanceTotalModel
 import com.example.domain.model.dto.IdDto
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.compose.component.LiveStatusView
+import com.example.pbbsattendance.model.LectureTimeItemModel
 import com.example.pbbsattendance.ui.theme.*
 import com.example.pbbsattendance.viewmodel.AfterStartAttendanceManageViewModel
 import com.example.pbbsattendance.viewmodel.BeforeStartAttendanceManageViewModel
@@ -44,14 +45,14 @@ fun AfterStartAttendanceManageScreen(
     AfterStartAttendanceManageScreen(
         attendanceTotalModel = attendanceTotal,
         scheduleSubject = scheduleSubject,
-        onFinishAttendance = {navController.navigate(route = Screen.BeforeStartAttendanceManage.route)}
+        onFinishAttendance = {navController.navigate(route = Screen.BeforeStartAttendanceManage.route)},
+        currentLectureTime = lectureTimeItem
     )
 
 }
 
 @Composable
-@OptIn(ExperimentalMaterialApi::class)
-fun AfterStartAttendanceManageScreen(attendanceTotalModel: AttendanceTotalModel, scheduleSubject:ScheduleEntity, onFinishAttendance:()->Unit = {}){
+fun AfterStartAttendanceManageScreen(attendanceTotalModel: AttendanceTotalModel, scheduleSubject:ScheduleEntity, onFinishAttendance:()->Unit = {}, currentLectureTime:LectureTimeItemModel){
     Column(
         Modifier
             .background(color = Color.White)
@@ -80,12 +81,15 @@ fun AfterStartAttendanceManageScreen(attendanceTotalModel: AttendanceTotalModel,
                         color = Grey4,
                         start = Offset(0f, size.height),
                         end = Offset(size.width, size.height),
-                        strokeWidth = 10f
+                        strokeWidth = 5f
                     )
                 }
         ){}
         Row(
-            Modifier.fillMaxWidth(),
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp)
+                .padding(start = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ){
@@ -96,8 +100,9 @@ fun AfterStartAttendanceManageScreen(attendanceTotalModel: AttendanceTotalModel,
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ){
-                Text(text="n차시", style = TextStyle(fontFamily = suit_medium, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
-                Text(text="23/04/25", style = TextStyle(fontFamily = suit_medium, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
+                Text(text = currentLectureTime.week + "주차" ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                Text(text = currentLectureTime.time + "차시" ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                Text(text = currentLectureTime.date ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
             }
         }
 //            LazyColumn {
