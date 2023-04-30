@@ -9,7 +9,9 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import com.example.pbbsattendance.compose.AttendanceCheckScreen
 import com.example.pbbsattendance.ui.theme.PbbsAttendanceTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AttendanceCheckFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
