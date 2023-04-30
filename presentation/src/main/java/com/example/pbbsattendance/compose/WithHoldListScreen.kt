@@ -1,6 +1,5 @@
 package com.example.pbbsattendance.compose.component
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -8,6 +7,8 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -51,21 +52,21 @@ fun WithHoldListScreen(
         onGetSelectedAttendance = { index ->
             withHoldListViewModel.getAttendanceTotalInfo(dateList[index],scheduleSubject.originId)
         },
-        selectedDate = lectureTimeItem
+        selectedLectureTime = lectureTimeItem
     )
 }
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<LectureTimeItemModel>,scheduleSubject:ScheduleEntity, onGetSelectedAttendance:(Int)->Unit = {}, selectedDate:LectureTimeItemModel){
+fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<LectureTimeItemModel>, scheduleSubject:ScheduleEntity, onGetSelectedAttendance:(Int)->Unit = {}, selectedLectureTime:LectureTimeItemModel){
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
-    var date by remember{
-        mutableStateOf(selectedDate)
+    var lectureTime by remember{
+        mutableStateOf(selectedLectureTime)
     }
     val onLectureTimeItemSelected = {index:Int ->
         onGetSelectedAttendance(index)
-        date = dateList[index]
+        lectureTime = dateList[index]
     }
 
     ModalBottomSheetLayout(
@@ -85,7 +86,19 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp)
+                    .padding(top=10.dp)
+                    .drawBehind {
+                        drawLine(
+                            color = Grey4,
+                            start = Offset(0f, size.height),
+                            end = Offset(size.width, size.height),
+                            strokeWidth = 5f
+                        )
+                    }
+            ){}
+            Row(
+                Modifier
+                    .fillMaxWidth()
                     .padding(start = 10.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -97,9 +110,9 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ){
-                    Text(text = date.week + "주차" ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
-                    Text(text = date.time + "차시" ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
-                    Text(text = date.date ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                    Text(text = lectureTime.week + "주차" ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                    Text(text = lectureTime.time + "차시" ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
+                    Text(text = lectureTime.date ,style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
                     IconButton(onClick = { scope.launch { state.show() }}) {
                         Icon(
                             painterResource(id = R.drawable.ic_more),
@@ -120,6 +133,6 @@ fun WithHoldListScreenPreview() {
         AttendanceTotalModel(attendance = 0, late = 0, absence = 0, public_ABSENCE = 0),
         dateList = listOf(LectureTimeItemModel(time="1", date = "23/04/30",week="9")),
         scheduleSubject = ScheduleEntity(originId = 0, scheduleDay = 30, scheduleName = "캡스톤디자인(2)", roomInfo = "505호", startTime = "10:00", endTime = "11:50"),
-        selectedDate = LectureTimeItemModel(time="1", date = "23/04/30",week="9")
+        selectedLectureTime = LectureTimeItemModel(time="1", date = "23/04/30",week="9")
     )
 }
