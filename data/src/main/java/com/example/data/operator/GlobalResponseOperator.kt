@@ -18,7 +18,9 @@ class GlobalResponseOperator<T> constructor(
 ) : ApiResponseSuspendOperator<T>() {
 
     // The body is empty, because we will handle the success case manually.
-    override suspend fun onSuccess(apiResponse: ApiResponse.Success<T>) = success(apiResponse)
+    override suspend fun onSuccess(apiResponse: ApiResponse.Success<T>) {
+        Log.i("GlobalResponseOperator.onSuccess.apiResponse::",apiResponse.response.code().toString())
+    }
 
     // handles error cases when the API request gets an error response.
     // e.g., internal server error.
