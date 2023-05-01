@@ -1,5 +1,6 @@
 package com.example.pbbsattendance.util
 
+import com.example.domain.model.type.AttendanceState
 import com.example.domain.model.type.TypeUser
 
 fun mapScheduleDay(day:String?):Int{
@@ -32,6 +33,17 @@ fun mapPepTalk(type:String?):String{
         TypeUser.ADMIN.koName -> result="관리자님 안녕하세요!"
         TypeUser.PROFESSOR.koName -> result="오늘도 알찬 수업 부탁드려요!"
         TypeUser.STUDENT.koName -> result="오늘도 알찬 하루 되세요!"
+    }
+    return result
+}
+
+fun mapAttendanceStateText(text:String):String{
+    var result = ""
+    when(text){
+        AttendanceState.ATTENDANCE.state -> result = "출석"
+        AttendanceState.LATE.state -> result = "지각"
+        AttendanceState.ABSENCE.state -> result = "결석"
+        AttendanceState.PUBLIC_ABSENCE.state -> result = "공결"
     }
     return result
 }
