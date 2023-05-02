@@ -1,7 +1,12 @@
 package com.example.pbbsattendance.compose.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -18,14 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.domain.model.AttendanceTotalModel
+import com.example.domain.model.UserModel
 import com.example.domain.model.dto.UserSubjectDto
+import com.example.domain.model.type.GenderUser
+import com.example.domain.model.type.TypeUser
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.compose.LectureTimeModalContent
 import com.example.pbbsattendance.model.LectureTimeItemModel
-import com.example.pbbsattendance.ui.theme.Blue3
-import com.example.pbbsattendance.ui.theme.Grey
-import com.example.pbbsattendance.ui.theme.Grey4
-import com.example.pbbsattendance.ui.theme.suit_regular
+import com.example.pbbsattendance.ui.theme.*
 import com.example.pbbsattendance.viewmodel.MainViewModel
 import com.example.pbbsattendance.viewmodel.WithHoldListViewModel
 import com.islandparadise14.mintable.ScheduleEntity
@@ -44,7 +49,7 @@ fun WithHoldListScreen(
     withHoldListViewModel.getAttendanceDateList(UserSubjectDto(idUser = user.id, idSubject = scheduleSubject.originId))
     val attendanceTotal by withHoldListViewModel.attendanceTotal.observeAsState(AttendanceTotalModel(0,0,0,0))
     val dateList by withHoldListViewModel.dateList.observeAsState(initial = emptyList())
-    //리컴포지션이 될때 계속 초기화가 되는 게 문제
+
     WithHoldListScreen(
         attendanceTotal = attendanceTotal,
         dateList = dateList,
@@ -68,6 +73,9 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
         onGetSelectedAttendance(index)
         lectureTime = dateList[index]
     }
+    var dialogState by remember {
+        mutableStateOf(false)
+    }
 
     ModalBottomSheetLayout(
         sheetState = state,
@@ -86,7 +94,7 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(top=10.dp)
+                    .padding(top = 10.dp)
                     .drawBehind {
                         drawLine(
                             color = Grey4,
@@ -121,7 +129,94 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
                     }
                 }
             }
+            LazyColumn {
+                itemsIndexed(
+                    listOf(UserModel(1,"2020209999", TypeUser.STUDENT,"김문기","010-7686-7103","051@inu.ac.kr","컴퓨터공학부",GenderUser.MALE))
+                )
+                { index, item ->
+                    Row(
+                        Modifier.clickable { dialogState = true }
+                    ) {
+                        StudentCard(data = item)
+                    }
+                }
+            }
+            if(dialogState){
+                AlertDialog(
+                    onDismissRequest = { },
+                    title = {
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.fillMaxWidth()
+                        ){
+                            Text(
+                                text = "출석 관리",
+                                style = TextStyle(fontFamily = suit_semibold, fontWeight = FontWeight.Bold, fontSize = 16.sp),
+                                color = Indigo,
+                            )
 
+                        }
+                    },
+                    text = {
+                        Row(
+                            horizontalArrangement = Arrangement.End,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("김진 202001541", style = TextStyle(fontFamily = suit_medium, fontWeight = FontWeight.Medium, fontSize = 8.sp), color = Grey )
+                        }
+                    },
+                    confirmButton = {
+                        Button(
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                            border = BorderStroke(1.dp, Blue5),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 10.dp, vertical = 5.dp)
+                                .height(33.dp),
+                            onClick = { dialogState = false }
+                        ){
+                            Text("출석", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
+                        }
+                        Button(
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Yellow2),
+                            border = BorderStroke(1.dp, Yellow),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 10.dp, vertical = 5.dp)
+                                .height(33.dp),
+                            onClick = { dialogState = false }
+                        ){
+                            Text("지각", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
+                        }
+                        Button(
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                            border = BorderStroke(1.dp, Pink),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 10.dp, vertical = 5.dp)
+                                .height(33.dp),
+                            onClick = { dialogState = false }
+                        ){
+                            Text("결석", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
+                        }
+                        Button(
+                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                            border = BorderStroke(1.dp, Green),
+                            shape = RoundedCornerShape(12.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 10.dp, vertical = 5.dp)
+                                .height(33.dp),
+                            onClick = { dialogState = false }
+                        ){
+                            Text("공결", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
+                        }
+                    },
+                )
+            }
         }
     }
 }

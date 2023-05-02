@@ -18,7 +18,6 @@ class AttendanceHistoryViewModel @Inject constructor(private val getAttendanceHi
     val historyList : LiveData<List<AttendanceHistoryModel>> get() = _historyList
 
     fun getAttendanceHistory(dto:UserSubjectDto){
-        val result = arrayListOf<LectureTimeItemModel>()
         viewModelScope.launch {
             _historyList.value = getAttendanceHistoryUseCase.invoke(dto)
         }

@@ -33,6 +33,7 @@ fun AttendanceManageModalContent(){
                         style = TextStyle(fontFamily = suit_semibold, fontWeight = FontWeight.Bold, fontSize = 16.sp),
                         color = Indigo,
                     )
+
                 }
             },
             text = {
@@ -52,7 +53,7 @@ fun AttendanceManageModalContent(){
                         .fillMaxWidth()
                         .padding(horizontal = 10.dp, vertical = 5.dp)
                         .height(33.dp),
-                    onClick = {print("")}
+                    onClick = { }
                 ){
                     Text("출석", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
                 }
