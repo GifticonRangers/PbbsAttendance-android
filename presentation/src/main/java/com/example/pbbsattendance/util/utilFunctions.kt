@@ -1,7 +1,11 @@
 package com.example.pbbsattendance.util
 
+import androidx.compose.ui.graphics.Color
 import com.example.domain.model.type.AttendanceState
 import com.example.domain.model.type.TypeUser
+import com.example.pbbsattendance.ui.theme.Black1
+import com.example.pbbsattendance.ui.theme.Blue5
+import com.example.pbbsattendance.ui.theme.Grey2
 
 fun mapScheduleDay(day:String?):Int{
     var result=0
@@ -46,4 +50,30 @@ fun mapAttendanceStateText(text:String):String{
         AttendanceState.PUBLIC_ABSENCE.state -> result = "공결"
     }
     return result
+}
+
+fun mapAttendanceBinaryStateText(text:String):String{
+    var result = ""
+    when(text){
+        AttendanceState.ATTENDANCE.state -> result = "출석"
+        else -> result = "미출석"
+    }
+    return result
+}
+
+fun colorMapper(status: String): Color {
+    when(status){
+        AttendanceState.ATTENDANCE.state -> return Blue5
+        else -> return Grey2
+    }
+}
+
+fun checkIdRegex(text:String){}
+
+fun changeToPhoneNumber(text:String):String{
+    val subString1 = text.substring(0 until 3)
+    val subString2 = text.substring(3 until 7)
+    val subString3 = text.substring(7)
+
+    return String.format("%s-%s-%s", subString1,subString2,subString3)
 }
