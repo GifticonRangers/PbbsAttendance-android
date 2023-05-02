@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.pbbsattendance.compose.BeforeTagNfcScreen
+import com.example.pbbsattendance.compose.Screen
 import com.example.pbbsattendance.compose.SetUpNavGraph
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,7 @@ class AttendanceCheckFragment: Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 navHostController = rememberNavController()
-                SetUpNavGraph(navController = navHostController)
+                SetUpNavGraph(navController = navHostController, startDestination = Screen.BeforeTagNfc.route)
             }
         }
     }

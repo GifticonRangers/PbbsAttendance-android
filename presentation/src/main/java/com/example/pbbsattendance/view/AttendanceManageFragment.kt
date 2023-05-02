@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.pbbsattendance.compose.Screen
 import com.example.pbbsattendance.compose.SetUpNavGraph
 
 class AttendanceManageFragment:Fragment() {
@@ -24,7 +25,7 @@ class AttendanceManageFragment:Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 navHostController = rememberNavController()
-                SetUpNavGraph(navController = navHostController)
+                SetUpNavGraph(navController = navHostController, startDestination = Screen.BeforeStartAttendanceManage.route)
             }
         }
     }
