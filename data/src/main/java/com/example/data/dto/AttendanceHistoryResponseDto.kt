@@ -12,4 +12,7 @@ data class AttendanceHistoryResponseDto(
     @SerializedName("idProfessor") val idProfessor:Int?,
     @SerializedName("idStudent") val idStudent:Int?,
     @SerializedName("idSubject") val idSubject:Int?,
+    @SerializedName("startAttendance") val startAttendance:String?,
+    @SerializedName("endAttendance") val endAttendance:String?,
+    @SerializedName("nfcCount") val nfcCount:Int?,
 )
