@@ -10,4 +10,5 @@ interface AttendanceRepository {
     suspend fun showAttendanceTimeList(dto:UserSubjectDto):ArrayList<LectureDateModel>
     suspend fun showAttendanceTotalInfo(dto:LectureInfoDto):AttendanceTotalModel
     suspend fun showAttendanceHistory(dto:UserSubjectDto):ArrayList<AttendanceHistoryModel>
+    suspend fun showAttendanceByTime(dto:LectureInfoDto):ArrayList<AttendanceHistoryModel>
 }

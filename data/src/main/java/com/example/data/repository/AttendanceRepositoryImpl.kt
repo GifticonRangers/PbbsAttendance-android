@@ -40,4 +40,15 @@ class AttendanceRepositoryImpl @Inject constructor(private val api:AttendanceSer
         }
         return result
     }
+
+    override suspend fun showAttendanceByTime(dto: LectureInfoDto): ArrayList<AttendanceHistoryModel> {
+        var result = arrayListOf<AttendanceHistoryModel>()
+        api.showAttendanceByTime(dto).suspendOnSuccess {
+            this.data.forEach {
+                val value = AttendanceMapper.mapToAttendanceHistoryModelMapper(it)
+                result.add(value)
+            }
+        }
+        return result
+    }
 }

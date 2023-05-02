@@ -8,7 +8,9 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import com.example.pbbsattendance.compose.AttendanceStatusScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AttendanceStatusFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
