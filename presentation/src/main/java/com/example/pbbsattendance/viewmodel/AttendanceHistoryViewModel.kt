@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.AttendanceHistoryModel
+import com.example.domain.model.dto.StudentSubjectDto
 import com.example.domain.model.dto.UserSubjectDto
 import com.example.domain.usecases.GetAttendanceHistoryUseCase
 import com.example.pbbsattendance.model.LectureTimeItemModel
@@ -17,7 +18,7 @@ class AttendanceHistoryViewModel @Inject constructor(private val getAttendanceHi
     private var _historyList: MutableLiveData<List<AttendanceHistoryModel>> = MutableLiveData()
     val historyList : LiveData<List<AttendanceHistoryModel>> get() = _historyList
 
-    fun getAttendanceHistory(dto:UserSubjectDto){
+    fun getAttendanceHistory(dto:StudentSubjectDto){
         viewModelScope.launch {
             _historyList.value = getAttendanceHistoryUseCase.invoke(dto)
         }

@@ -4,6 +4,7 @@ import com.example.data.dto.AttendanceDateResponseDto
 import com.example.data.dto.AttendanceHistoryResponseDto
 import com.example.data.dto.AttendanceTotalResponseDto
 import com.example.domain.model.dto.LectureInfoDto
+import com.example.domain.model.dto.StudentSubjectDto
 import com.example.domain.model.dto.UserSubjectDto
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.Body
@@ -17,7 +18,7 @@ interface AttendanceService {
     suspend fun showAttendanceInfo(@Body dto:LectureInfoDto):ApiResponse<AttendanceTotalResponseDto>
 
     @POST("/api/attendance/showAttendanceByUser")
-    suspend fun showAttendanceByUser(@Body dto:UserSubjectDto):ApiResponse<ArrayList<AttendanceHistoryResponseDto>>
+    suspend fun showAttendanceByUser(@Body dto:StudentSubjectDto):ApiResponse<ArrayList<AttendanceHistoryResponseDto>>
 
     @POST("/api/attendance/showAttendanceByTime")
     suspend fun showAttendanceByTime(@Body dto:LectureInfoDto):ApiResponse<ArrayList<AttendanceHistoryResponseDto>>

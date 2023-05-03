@@ -21,12 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.domain.model.AttendanceHistoryModel
-import com.example.domain.model.dto.UserSubjectDto
+import com.example.domain.model.dto.StudentSubjectDto
 import com.example.domain.model.type.AttendanceState
 import com.example.pbbsattendance.compose.component.LectureTitle
-import com.example.pbbsattendance.dummyData.Attendance
-import com.example.pbbsattendance.dummyData.AttendanceHistory
-import com.example.pbbsattendance.model.LectureTimeItemModel
 import com.example.pbbsattendance.ui.theme.*
 import com.example.pbbsattendance.util.mapAttendanceStateText
 import com.example.pbbsattendance.viewmodel.AttendanceHistoryViewModel
@@ -40,8 +37,9 @@ fun AttendanceHistoryScreen(
 ){
     val scheduleSubject = mainViewModel.getScheduleSubject()
     val user = mainViewModel.getUser()
+    Log.i("AttendanceHistoryScreen","user.id: ${user.id}, scheduleSubject.originId: ${scheduleSubject.originId}")
 
-    attendanceHistoryViewModel.getAttendanceHistory(UserSubjectDto(user.id, scheduleSubject.originId))
+    attendanceHistoryViewModel.getAttendanceHistory(StudentSubjectDto(user.id, scheduleSubject.originId))
     val historyList by attendanceHistoryViewModel.historyList.observeAsState(initial = emptyList())
 
     AttendanceHistoryScreen(scheduleSubject, historyList)
