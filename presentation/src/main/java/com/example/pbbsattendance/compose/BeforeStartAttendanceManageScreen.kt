@@ -42,7 +42,7 @@ fun BeforeStartAttendanceManageScreen(
         dateList = dateList,
         scheduleSubject = scheduleSubject,
         onStartAttendance = { index ->
-            mainViewModel.setLectureTimeItem(dateList[index])
+            beforeStartAttendanceManageViewModel.postLectureTimeItemEvent(dateList[index])
             navController.navigate(route = Screen.AfterStartAttendanceManage.route)
         }
     )

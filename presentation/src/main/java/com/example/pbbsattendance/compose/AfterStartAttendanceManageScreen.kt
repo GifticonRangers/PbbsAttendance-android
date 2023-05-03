@@ -1,5 +1,6 @@
 package com.example.pbbsattendance.compose
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -37,18 +38,37 @@ fun AfterStartAttendanceManageScreen(
 ) {
     val scheduleSubject = mainViewModel.getScheduleSubject()
     val lectureTimeItem = mainViewModel.getLectureTimeItem()
+    val startNfcResponseCode by remember {
+        mutableStateOf(afterStartAttendanceManageViewModel.startNfcTagResponseCode)
+    }
+    LaunchedEffect(Unit) {
+        afterStartAttendanceManageViewModel.startNfcTag(lectureTimeItem, idSubject = scheduleSubject.originId)
+    }
 
     afterStartAttendanceManageViewModel.getAttendanceTotalInfo(lectureTimeItem,scheduleSubject.originId)
-
     val attendanceTotal by afterStartAttendanceManageViewModel.attendanceTotal.observeAsState(AttendanceTotalModel(0,0,0,0))
 
-    AfterStartAttendanceManageScreen(
-        attendanceTotalModel = attendanceTotal,
-        scheduleSubject = scheduleSubject,
-        onFinishAttendance = {navController.navigate(route = Screen.BeforeStartAttendanceManage.route)},
-        currentLectureTime = lectureTimeItem
-    )
+    if (startNfcResponseCode.value == "200"){
+        AfterStartAttendanceManageScreen(
+            attendanceTotalModel = attendanceTotal,
+            scheduleSubject = scheduleSubject,
+            onFinishAttendance = {
+                afterStartAttendanceManageViewModel.endNfcTag(lectureTimeItem, idSubject = scheduleSubject.originId)
+                navController.navigate(route = Screen.BeforeStartAttendanceManage.route)
+            },
+            currentLectureTime = lectureTimeItem
+        )
+    }
+    else{
+        EmptyScreen()
+    }
+}
 
+@Composable
+fun EmptyScreen(){
+    Column() {
+        Text("nfc출석을 시작하는데 문제가 생겼습니다. 빠른 시일 내에 복구할 예정입니다.")
+    }
 }
 
 @Composable

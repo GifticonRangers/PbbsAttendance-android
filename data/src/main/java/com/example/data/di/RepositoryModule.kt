@@ -1,13 +1,7 @@
 package com.example.data.di
 
-import com.example.data.repository.AttendanceRepositoryImpl
-import com.example.data.repository.LoginRepositoryImpl
-import com.example.data.repository.SubjectRepositoryImpl
-import com.example.data.repository.UserRepositoryImpl
-import com.example.domain.repository.AttendanceRepository
-import com.example.domain.repository.LoginRepository
-import com.example.domain.repository.SubjectRepository
-import com.example.domain.repository.UserRepository
+import com.example.data.repository.*
+import com.example.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,17 +14,21 @@ interface RepositoryModule {
 
     @Binds
     @Singleton
-    fun bindUserRepositoryImpl(repository: UserRepositoryImpl):UserRepository
+    fun bindUserRepositoryImpl(repositoryImpl: UserRepositoryImpl):UserRepository
 
     @Binds
     @Singleton
-    fun bindLoginRepositoryImpl(repository: LoginRepositoryImpl):LoginRepository
+    fun bindLoginRepositoryImpl(repositoryImpl: LoginRepositoryImpl):LoginRepository
 
     @Binds
     @Singleton
-    fun bindSubjectRepositoryImpl(repository: SubjectRepositoryImpl):SubjectRepository
+    fun bindSubjectRepositoryImpl(repositoryImpl: SubjectRepositoryImpl):SubjectRepository
 
     @Binds
     @Singleton
-    fun bindAttendanceRepositoryImpl(repository: AttendanceRepositoryImpl):AttendanceRepository
+    fun bindAttendanceRepositoryImpl(repositoryIml: AttendanceRepositoryImpl):AttendanceRepository
+
+    @Binds
+    @Singleton
+    fun bindNfcRepositoryImpl(repositoryImpl: NfcRepositoryImpl):NfcRepository
 }

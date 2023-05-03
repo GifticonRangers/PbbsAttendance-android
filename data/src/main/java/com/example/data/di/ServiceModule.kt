@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.data.api.*
 import com.example.data.repository.datasource.TokenLocalDataSource
 import com.example.data.repository.datasource.TokenLocalDataSourceImpl
+import com.example.data.util.NullOnEmptyConverterFactory
 import com.google.gson.GsonBuilder
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -49,6 +50,12 @@ object ServiceModule {
     @Provides
     fun provideAttendanceService(retrofit: Retrofit): AttendanceService {
         return retrofit.create(AttendanceService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNfcService(retrofit: Retrofit): NfcService {
+        return retrofit.create(NfcService::class.java)
     }
 
     @Singleton

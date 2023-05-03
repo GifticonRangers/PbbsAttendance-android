@@ -17,7 +17,7 @@ object LectureMapper {
         return LectureInfoDto(
             timeAttendance = lectureTimeItemModel.time + "차시",
             weekAttendance = lectureTimeItemModel.week + "주차",
-            idSubject = idSubject.toString()
+            idSubject = idSubject
         )
     }
 }
