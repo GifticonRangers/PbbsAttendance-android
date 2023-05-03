@@ -43,7 +43,7 @@ fun AttendanceStatusScreen(
     val scheduleSubject = mainViewModel.getScheduleSubject()
     val lectureTime = mainViewModel.getLectureTimeItem()
 
-    attendanceStatusViewModel.getAttendanceStatus(LectureInfoDto(lectureTime.week, lectureTime.time, scheduleSubject.originId.toString()))
+    attendanceStatusViewModel.getAttendanceStatus(LectureInfoDto(lectureTime.week, lectureTime.time, scheduleSubject.originId))
     val statusList by attendanceStatusViewModel.statusList.observeAsState(initial = emptyList())
 
     AttendanceStatusScreen(scheduleSubject, statusList)
