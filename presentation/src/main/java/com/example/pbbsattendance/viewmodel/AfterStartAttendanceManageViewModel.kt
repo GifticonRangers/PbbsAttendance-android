@@ -33,9 +33,9 @@ class AfterStartAttendanceManageViewModel @Inject constructor(
     val startNfcTagResponseCode: LiveData<String> get() = _startNfcTagResponseCode
     private var _endNfcTagResponseCode: MutableLiveData<String> = MutableLiveData()
     val endNfcTagResponseCode: LiveData<String> get() = _endNfcTagResponseCode
-    lateinit var job:Job
+    private lateinit var job:Job
 
-    fun getLiveAttendanceTotalInfo(lectureTimeItemModel:LectureTimeItemModel, idSubject:Int){
+    fun collectLiveAttendanceTotalInfo(lectureTimeItemModel:LectureTimeItemModel, idSubject:Int){
         val dto = LectureMapper.mapToLectureInfoDto(lectureTimeItemModel, idSubject)
         job = viewModelScope.launch {
             getAttendanceTotalInfoUseCase.invoke(dto)

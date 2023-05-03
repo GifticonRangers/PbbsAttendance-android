@@ -43,7 +43,7 @@ fun AfterStartAttendanceManageScreen(
     }
     LaunchedEffect(Unit) {
         afterStartAttendanceManageViewModel.startNfcTag(lectureTimeItem, idSubject = scheduleSubject.originId)
-        afterStartAttendanceManageViewModel.getLiveAttendanceTotalInfo(lectureTimeItem, idSubject = scheduleSubject.originId)
+        afterStartAttendanceManageViewModel.collectLiveAttendanceTotalInfo(lectureTimeItem, idSubject = scheduleSubject.originId)
         Log.i("AfterStartAttendanceManageScreen","LaunchedEffect")
     }
     val lifecycleOwner = LocalLifecycleOwner.current
