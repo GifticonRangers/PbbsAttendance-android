@@ -25,4 +25,7 @@ interface DataSourceModule {
     @Singleton
     fun bindTokenRemoteDataSourceImpl(dataSourceImpl: TokenRemoteSourceImpl):TokenRemoteDataSource
 
+    @Binds
+    @Singleton
+    fun bindAttendanceRemoteDataSourceImpl(dataSourceImpl: AttendanceRemoteDataSourceImpl):AttendanceRemoteDataSource
 }

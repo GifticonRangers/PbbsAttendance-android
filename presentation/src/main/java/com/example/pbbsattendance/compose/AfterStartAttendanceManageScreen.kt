@@ -7,26 +7,26 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.NavController
 import com.example.domain.model.AttendanceTotalModel
-import com.example.domain.model.dto.IdDto
 import com.example.pbbsattendance.compose.component.LectureTitle
 import com.example.pbbsattendance.compose.component.LiveStatusView
 import com.example.pbbsattendance.model.LectureTimeItemModel
 import com.example.pbbsattendance.ui.theme.*
 import com.example.pbbsattendance.viewmodel.AfterStartAttendanceManageViewModel
-import com.example.pbbsattendance.viewmodel.BeforeStartAttendanceManageViewModel
 import com.example.pbbsattendance.viewmodel.MainViewModel
 import com.islandparadise14.mintable.ScheduleEntity
 
@@ -43,10 +43,14 @@ fun AfterStartAttendanceManageScreen(
     }
     LaunchedEffect(Unit) {
         afterStartAttendanceManageViewModel.startNfcTag(lectureTimeItem, idSubject = scheduleSubject.originId)
+        afterStartAttendanceManageViewModel.getLiveAttendanceTotalInfo(lectureTimeItem, idSubject = scheduleSubject.originId)
+        Log.i("AfterStartAttendanceManageScreen","LaunchedEffect")
     }
-
-    afterStartAttendanceManageViewModel.getAttendanceTotalInfo(lectureTimeItem,scheduleSubject.originId)
-    val attendanceTotal by afterStartAttendanceManageViewModel.attendanceTotal.observeAsState(AttendanceTotalModel(0,0,0,0))
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val flowLifecycleAware = remember(afterStartAttendanceManageViewModel.attendanceTotal, lifecycleOwner) {
+        afterStartAttendanceManageViewModel.attendanceTotal.flowWithLifecycle(lifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+    }
+    val attendanceTotal by flowLifecycleAware.collectAsState(initial = AttendanceTotalModel(0,0,0,0))
 
     if (startNfcResponseCode.value == "200"){
         AfterStartAttendanceManageScreen(
@@ -54,6 +58,7 @@ fun AfterStartAttendanceManageScreen(
             scheduleSubject = scheduleSubject,
             onFinishAttendance = {
                 afterStartAttendanceManageViewModel.endNfcTag(lectureTimeItem, idSubject = scheduleSubject.originId)
+                afterStartAttendanceManageViewModel.stopLiveAttendanceTotalInfo()
                 navController.navigate(route = Screen.BeforeStartAttendanceManage.route)
             },
             currentLectureTime = lectureTimeItem
