@@ -36,7 +36,7 @@ object AttendanceMapper {
             time = dto.timeAttendance?:"",
             stateAttendance = dto.stateAttendance?:AttendanceState.NULL,
             idProfessor = dto.idProfessor!!,
-            idStudent = dto.idSubject!!,
+            idStudent = dto.idStudent!!,
             idSubject = dto.idSubject!!,
         )
     }
