@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.AttendanceTotalModel
 import com.example.domain.usecases.GetLiveAttendanceTotalInfoUseCase
-import com.example.domain.usecases.GetNfcEndUseCase
-import com.example.domain.usecases.GetNfcStartUseCase
+import com.example.domain.usecases.EndNfcTagUseCase
+import com.example.domain.usecases.StartNfcTagUseCase
 import com.example.pbbsattendance.mapper.LectureMapper
 import com.example.pbbsattendance.model.LectureTimeItemModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,8 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AfterStartAttendanceManageViewModel @Inject constructor(
     private val getAttendanceTotalInfoUseCase: GetLiveAttendanceTotalInfoUseCase,
-    private val getNfcStartUseCase: GetNfcStartUseCase,
-    private val getNfcEndUseCase: GetNfcEndUseCase,
+    private val getNfcStartUseCase: StartNfcTagUseCase,
+    private val getNfcEndUseCase: EndNfcTagUseCase,
 ): ViewModel(){
     private val _attendanceTotal: MutableStateFlow<AttendanceTotalModel> = MutableStateFlow(
         AttendanceTotalModel(0,0,0,0)

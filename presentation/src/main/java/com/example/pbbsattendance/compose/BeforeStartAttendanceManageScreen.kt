@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -102,8 +103,11 @@ fun BeforeStartAttendanceManageScreen(dateList:List<LectureTimeItemModel>, sched
     }
 }
 
-//@Preview
-//@Composable
-//private fun BeforeStartAttendanceManagePreview(){
-//    BeforeStartAttendanceManageScreen(navController = rememberNavController(),  )
-//}
+@Preview
+@Composable
+private fun BeforeStartAttendanceManagePreview(){
+    BeforeStartAttendanceManageScreen(
+        dateList = listOf(LectureTimeItemModel(time="1", date = "23/04/30",week="9")),
+        scheduleSubject = ScheduleEntity(originId = 0, scheduleDay = 30, scheduleName = "캡스톤디자인(2)", roomInfo = "505호", startTime = "10:00", endTime = "11:50"),
+    )
+}
