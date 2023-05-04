@@ -1,5 +1,6 @@
 package com.example.pbbsattendance.viewmodel
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.AttendanceHistoryModel
@@ -16,7 +17,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AttendanceStatusViewModel @Inject constructor(private val getAttendanceStatusUseCase: GetLiveAttendanceStatusUseCase):ViewModel(){
+class AttendanceStatusViewModel @Inject constructor(
+    private val getAttendanceStatusUseCase: GetLiveAttendanceStatusUseCase
+):ViewModel(){
     private var _attendanceStatus:
             MutableStateFlow<AttendanceHistoryModel> = MutableStateFlow(
         AttendanceHistoryModel("","","",AttendanceState.NULL,0,0,0)
