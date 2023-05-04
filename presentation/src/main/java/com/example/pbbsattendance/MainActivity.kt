@@ -14,12 +14,19 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.pbbsattendance.databinding.ActivityMainBinding
 import com.example.pbbsattendance.eventbus.LectureTimeItemEvent
 import com.example.pbbsattendance.eventbus.ScheduleSubjectEvent
 import com.example.pbbsattendance.eventbus.UserEvent
+import com.example.pbbsattendance.util.getPayload
 import com.example.pbbsattendance.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -80,22 +87,23 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
             /**admin페이지로 기능 분리 성공하기 전까지 keep*/
-//        val detectedTag:Tag? = intent?.getParcelableExtra(NfcAdapter.EXTRA_TAG)
-//        //nfc payload 쓰기
-//        val writeValue = "19"
+        val detectedTag:Tag? = intent?.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+        //nfc payload 쓰기
+//        val writeValue = "18"
 //        val message:NdefMessage = createTagMessage(writeValue)
 //        writeTag(message, detectedTag!!)
-//
-//        //nfc payload 읽기
-//        val messages = intent?.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
-//        if (messages == null){
-//            Log.i("MainActivity.readMsg.result::-----------------------------------------------------------------","Empty messages");
-//            return
-//        }
-//        for (i in messages.indices) {
-//            val result = readMsg(messages[i] as NdefMessage)
-//            Log.i("MainActivity.readMsg.result::-----------------------------------------------------------------",result);
-//        }
+        //nfc payload 읽기
+        val messages = intent?.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
+        if (messages == null){
+            Log.i("MainActivity.readMsg.result::-----------------------------------------------------------------","Empty messages")
+        }
+        if (messages != null) {
+            for (i in messages.indices) {
+                val result = readMsg(messages[i] as NdefMessage)
+                Log.i("MainActivity.readMsg.result::-----------------------------------------------------------------",getPayload(result))
+                mainViewModel.getAuthNfc(getPayload(result))
+            }
+        }
     }
 
     private fun createTagMessage(msg:String):NdefMessage{

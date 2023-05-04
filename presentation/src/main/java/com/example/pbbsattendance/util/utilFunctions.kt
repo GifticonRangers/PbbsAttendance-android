@@ -3,6 +3,7 @@ package com.example.pbbsattendance.util
 import androidx.compose.ui.graphics.Color
 import com.example.domain.model.type.AttendanceState
 import com.example.domain.model.type.TypeUser
+import com.example.pbbsattendance.model.LectureTimeItemModel
 import com.example.pbbsattendance.ui.theme.Black1
 import com.example.pbbsattendance.ui.theme.Blue5
 import com.example.pbbsattendance.ui.theme.Grey2
@@ -76,4 +77,13 @@ fun changeToPhoneNumber(text:String):String{
     val subString3 = text.substring(7)
 
     return String.format("%s-%s-%s", subString1,subString2,subString3)
+}
+
+fun isEmptyLectureTimeItem(data:LectureTimeItemModel):Boolean{
+    if(data == LectureTimeItemModel("","","")) return true
+    return false
+}
+
+fun getPayload(text:String):String{
+    return text.substring(33)
 }

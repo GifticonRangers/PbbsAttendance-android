@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import android.util.Log
 import com.example.data.api.NfcService
 import com.example.domain.model.dto.LectureInfoDto
 import com.example.domain.repository.NfcRepository
@@ -17,10 +18,20 @@ class NfcRepositoryImpl @Inject constructor( private val api:NfcService ):NfcRep
         }
         return result
     }
+
     override suspend fun endNfcTag(dto: LectureInfoDto): String {
         var result = ""
         api.endNfcTag(dto).suspendOnSuccess {
             result = "200"
+        }
+        return result
+    }
+
+    override suspend fun authNfcTag(id: Int, dto: LectureInfoDto): String {
+        var result = ""
+        api.authNfcTag(id,dto).suspendOnSuccess {
+            result = this.statusCode.code.toString()
+            Log.i("NfcRepositoryImpl.authNfcTag","${result}")
         }
         return result
     }
