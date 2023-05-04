@@ -14,7 +14,7 @@ class NfcRepositoryImpl @Inject constructor( private val api:NfcService ):NfcRep
     override suspend fun startNfcTag(dto: LectureInfoDto): String {
         var result = ""
         api.startNfcTag(dto).suspendOnSuccess {
-            result = "200"
+            result = this.statusCode.code.toString()
         }
         return result
     }
@@ -22,7 +22,7 @@ class NfcRepositoryImpl @Inject constructor( private val api:NfcService ):NfcRep
     override suspend fun endNfcTag(dto: LectureInfoDto): String {
         var result = ""
         api.endNfcTag(dto).suspendOnSuccess {
-            result = "200"
+            result = this.statusCode.code.toString()
         }
         return result
     }
