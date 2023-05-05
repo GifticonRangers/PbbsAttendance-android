@@ -97,11 +97,11 @@ class MainViewModel @Inject constructor(private val getAuthNfcUseCase: GetAuthNf
     }
 
     fun getAuthNfc(nfcPayloadId:String){
-        val dto = LectureMapper.mapToLectureInfoDto(selectedLectureTime.value, schduleSubject.originId)
-
+        val dto = LectureMapper.mapToLectureInfoDto(lectureTimeItem, schduleSubject.originId)
+        Log.i("MainViewModel.getAuthNfc.dto","${dto}")
         if (nfcPayloadId in nfcPayloadList){
             viewModelScope.launch {
-                authNfcResult = getAuthNfcUseCase.invoke(user.id,dto)
+                authNfcResult = getAuthNfcUseCase.invoke(dto)
             }
             Log.i("MainViewModel.getAuthNfc.success::","${authNfcResult}")
         }
@@ -110,6 +110,7 @@ class MainViewModel @Inject constructor(private val getAuthNfcUseCase: GetAuthNf
             Log.i("MainViewModel.getAuthNfc.UNVAILABLE_TAG::","${authNfcResult}")
         }
     }
+
     fun getAuthNfcResultFlow(){
         val refreshIntervalMs:Long = 3000
         Log.i("MainViewModel.getAuthNfcResultFlow.beforeFlow::","${authNfcResult}")

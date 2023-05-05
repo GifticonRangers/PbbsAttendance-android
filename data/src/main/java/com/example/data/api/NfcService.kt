@@ -14,9 +14,8 @@ interface NfcService {
     @POST("/api/nfc/endNfcTag")
     suspend fun endNfcTag(@Body dto: LectureInfoDto):ApiResponse<Unit>
 
-    @POST("/api/nfc/authNFC/{id}")
+    @POST("/api/nfc/authNFC")
     suspend fun authNfcTag(
-        @Path("id") id:Int,
         @Body dto:LectureInfoDto
     ):ApiResponse<Unit>
 }

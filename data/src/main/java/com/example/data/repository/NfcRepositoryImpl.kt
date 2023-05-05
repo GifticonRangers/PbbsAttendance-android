@@ -27,9 +27,9 @@ class NfcRepositoryImpl @Inject constructor( private val api:NfcService ):NfcRep
         return result
     }
 
-    override suspend fun authNfcTag(id: Int, dto: LectureInfoDto): String {
+    override suspend fun authNfcTag(dto: LectureInfoDto): String {
         var result = ""
-        api.authNfcTag(id,dto).suspendOnSuccess {
+        api.authNfcTag(dto).suspendOnSuccess {
             result = this.statusCode.code.toString()
             Log.i("NfcRepositoryImpl.authNfcTag","${result}")
         }
