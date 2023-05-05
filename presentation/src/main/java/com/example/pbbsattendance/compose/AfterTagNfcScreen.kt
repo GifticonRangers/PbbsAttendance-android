@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -45,61 +47,92 @@ fun AfterTagNfcScreen(
 
 @Composable
 fun AfterTagNfcScreens(authNfcResult:String, onStopNfcResultFlow:()->Unit){
-    if(authNfcResult == "201"){
-        NfcAuthSuccessView()
-        onStopNfcResultFlow()
-    }
-    if(authNfcResult == "200"){
-        NfcAuthTimeOutView()
-        onStopNfcResultFlow()
-    }
-    if(authNfcResult == "UNVAILABLE_TAG"){
-        NotAllowedNfcTagView()
-    }
-    else{
-        NfcTagOrderView()
+    Column(
+        Modifier.fillMaxWidth()
+            .fillMaxHeight()
+    ) {
+        if(authNfcResult == "201"){
+            NfcAuthSuccessView()
+        }
+        if(authNfcResult == "200"){
+            NfcAuthTimeOutView()
+        }
+        if(authNfcResult == "UNVAILABLE_TAG"){
+            NotAllowedNfcTagView()
+        }
+        else{
+            NfcTagOrderView()
+        }
     }
 }
 @Composable
 fun NfcTagOrderView(){
-    Text(
-        text = "휴대폰으로 nfc태그를 읽어주세요",
-        style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 14.sp),
-        color = Blue1
-    )
+    Column(
+        Modifier.background(Color.White).fillMaxHeight().fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "휴대폰으로 nfc태그를 읽어주세요",
+            style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 14.sp),
+            color = Blue1
+        )
+    }
 }
 
 @Composable
 fun NfcAuthSuccessView(){
-    Text(
-        text = "nfc 출석이 완료되었습니다",
-        style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 14.sp),
-        color = Blue1
-    )
+    Column(
+        Modifier.background(Color.White).fillMaxHeight().fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "nfc 출석이 완료되었습니다",
+            style = TextStyle(
+                fontFamily = suit_regular,
+                fontWeight = FontWeight.W500,
+                fontSize = 14.sp
+            ),
+            color = Blue1
+        )
+    }
 }
 
 @Composable
 fun NfcAuthTimeOutView(){
-    Text(
-        text = "nfc 출석이 마감되었습니다",
-        style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 14.sp),
-        color = Blue1
-    )
+    Column(
+        Modifier.background(Color.White).fillMaxHeight().fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "nfc 출석이 마감되었습니다",
+            style = TextStyle(
+                fontFamily = suit_regular,
+                fontWeight = FontWeight.W500,
+                fontSize = 14.sp
+            ),
+            color = Blue1
+        )
+    }
 }
 @Composable
 fun NotAllowedNfcTagView(){
     Column(
-        Modifier
-            .background(Color.White),
+        Modifier.background(Color.White).fillMaxHeight().fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = "사용가능한 nfc가 아닙니다",
-            style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 14.sp),
+            style = TextStyle(
+                fontFamily = suit_regular,
+                fontWeight = FontWeight.W500,
+                fontSize = 14.sp
+            ),
             color = Blue1
         )
-
     }
 }
 
