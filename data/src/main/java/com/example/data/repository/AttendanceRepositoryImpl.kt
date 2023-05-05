@@ -47,15 +47,4 @@ class AttendanceRepositoryImpl @Inject constructor(private val remoteDataSource:
     override suspend fun showLiveAttendanceHistory(dto: StudentSubjectDto): Flow<ArrayList<AttendanceHistoryModel>> {
         return remoteDataSource.showLiveAttendanceHistory(dto)
     }
-
-    override suspend fun showAttendanceByTime(dto: LectureInfoDto): ArrayList<AttendanceHistoryModel> {
-        var result = arrayListOf<AttendanceHistoryModel>()
-        api.showAttendanceByTime(dto).suspendOnSuccess {
-            this.data.forEach {
-                val value = AttendanceMapper.mapToAttendanceHistoryModelMapper(it)
-                result.add(value)
-            }
-        }
-        return result
-    }
 }

@@ -19,7 +19,4 @@ interface AttendanceService {
 
     @POST("/api/attendance/showAttendanceByUser")
     suspend fun showAttendanceByUser(@Body dto:StudentSubjectDto):ApiResponse<ArrayList<AttendanceHistoryResponseDto>>
-
-    @POST("/api/attendance/showAttendanceByTime")
-    suspend fun showAttendanceByTime(@Body dto:LectureInfoDto):ApiResponse<ArrayList<AttendanceHistoryResponseDto>>
 }
