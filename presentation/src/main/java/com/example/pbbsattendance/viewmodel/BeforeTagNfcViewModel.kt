@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BeforeTagNfcViewModel @Inject constructor(
-    private val getAttendanceDateListUseCase: GetAttendanceDateListUseCase,
+    private val getAttendanceDateListUseCase: GetAttendanceDateListUseCase
 ):ViewModel(){
     private var _dateList: MutableLiveData<List<LectureTimeItemModel>> = MutableLiveData()
     val dateList : LiveData<List<LectureTimeItemModel>> get() = _dateList

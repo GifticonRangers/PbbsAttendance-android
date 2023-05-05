@@ -1,5 +1,6 @@
 package com.example.pbbsattendance.compose
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -48,7 +49,6 @@ fun BeforeTagNfcScreen(
             navController.navigate(route = Screen.AfterTagNfc.route)
         }
     )
-
 }
 
 @Composable
