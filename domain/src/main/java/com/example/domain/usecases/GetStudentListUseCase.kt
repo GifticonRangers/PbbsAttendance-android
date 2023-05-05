@@ -1,5 +1,6 @@
 package com.example.domain.usecases
 
+import com.example.domain.model.AttendantModel
 import com.example.domain.model.UserModel
 import com.example.domain.model.dto.IdDto
 import com.example.domain.repository.UserRepository
@@ -10,6 +11,10 @@ import javax.inject.Singleton
 class GetStudentListUseCase @Inject constructor(private val userRepository: UserRepository){
     suspend fun invoke(dto:IdDto):ArrayList<UserModel>{
         val result = userRepository.getUserBySubjectId(dto)
+        return result
+    }
+    suspend fun getDataAsAttendantModel(dto:IdDto):ArrayList<AttendantModel>{
+        val result = userRepository.getAttendantBySubjectId(dto)
         return result
     }
 }
