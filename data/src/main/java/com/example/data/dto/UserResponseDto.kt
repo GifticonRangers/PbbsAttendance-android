@@ -14,6 +14,7 @@ data class UserResponseDto(
     @SerializedName("emailUser") val emailUser: String?,
     @SerializedName("dptUser") val departmentUser: String?,
     @SerializedName("genderUser") val genderUser: GenderUser?,
+    @SerializedName("refreshToken") val refreshToken: String?,
     @SerializedName("enabled") val enabled: Boolean?,
     @SerializedName("authorities") val authorities: Array<AuthorityDto>?,
     @SerializedName("username") val username: String?,
