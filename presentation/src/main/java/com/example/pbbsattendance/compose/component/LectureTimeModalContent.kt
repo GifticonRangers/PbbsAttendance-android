@@ -89,6 +89,7 @@ fun LectureTimeItem(data:LectureTimeItemModel, index:Int, onClick:(Int) -> Unit)
                 .fillMaxWidth()
                 .padding(vertical = 20.dp, horizontal = 13.dp),
         ){
+            Text(text = data.week+"주차", style = TextStyle(fontFamily = suit_medium, fontSize = 14.sp))
             Text(text = data.time+"차시", modifier = Modifier.align(Alignment.Center), style = TextStyle(fontFamily = suit_medium, fontSize = 14.sp))
             Text(text = data.date, modifier = Modifier.align(Alignment.CenterEnd), style = TextStyle(fontFamily = suit_regular, fontSize = 14.sp))
         }
