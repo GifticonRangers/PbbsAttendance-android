@@ -53,9 +53,11 @@ fun AfterTagNfcScreens(authNfcResult:String, onStopNfcResultFlow:()->Unit){
     ) {
         if(authNfcResult == "201"){
             NfcAuthSuccessView()
+            onStopNfcResultFlow()
         }
         if(authNfcResult == "200"){
             NfcAuthTimeOutView()
+            onStopNfcResultFlow()
         }
         if(authNfcResult == "UNVAILABLE_TAG"){
             NotAllowedNfcTagView()

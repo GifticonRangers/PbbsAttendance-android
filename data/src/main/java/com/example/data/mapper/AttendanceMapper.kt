@@ -3,10 +3,12 @@ package com.example.data.mapper
 import com.example.data.dto.AttendanceDateResponseDto
 import com.example.data.dto.AttendanceHistoryResponseDto
 import com.example.data.dto.AttendanceTotalResponseDto
+import com.example.data.dto.UserBriefResponseDto
 import com.example.data.util.INF
 import com.example.domain.model.AttendanceHistoryModel
 import com.example.domain.model.AttendanceTotalModel
 import com.example.domain.model.LectureDateModel
+import com.example.domain.model.UserBriefModel
 import com.example.domain.model.type.AttendanceState
 
 object AttendanceMapper {
