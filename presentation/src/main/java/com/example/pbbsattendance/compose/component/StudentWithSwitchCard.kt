@@ -1,5 +1,6 @@
 package com.example.pbbsattendance.compose.component
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,15 +22,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.domain.model.AttendanceHistoryModel
+import com.example.domain.model.AttendantModel
 import com.example.domain.model.UserModel
+import com.example.domain.model.type.AttendanceState
 import com.example.domain.model.type.GenderUser
 import com.example.domain.model.type.TypeUser
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.ui.theme.*
+import com.example.pbbsattendance.util.isAttendance
 
 @Composable
-fun StudentWithSwitchCard(data: UserModel) {
-    val checkedSwitch = remember{mutableStateOf(false)}
+fun StudentWithSwitchCard(data: AttendantModel) {
+    Log.i("StudentWithSwitchCard.data::","${data.state.toString()},,,,${data.state!!.state.toString()}")
+    val checkedSwitch = isAttendance(data.state.toString())
     Row(
         Modifier
             .padding(bottom = 5.dp)
@@ -42,20 +48,21 @@ fun StudentWithSwitchCard(data: UserModel) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(painter = painterResource(id = R.drawable.ic_student), contentDescription = "")
-            Text(text = data.nameUser, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp)  )
-            Text(text = data.idUser, style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 10.sp), color = Grey2, modifier = Modifier.padding(start=5.dp) )
+            Text(text = data.name?:"", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp)  )
+            Text(text = data.idUser?:"", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 10.sp), color = Grey2, modifier = Modifier.padding(start=5.dp) )
         }
         Row(
         ) {
             Switch(
-                checked = checkedSwitch.value,
-                onCheckedChange = {checkedSwitch.value = it},
+                checked = checkedSwitch,
+                onCheckedChange = {checkedSwitch},
                 colors = SwitchDefaults.colors(
                     checkedThumbColor = Blue3,
                     checkedTrackColor = Blue4,
                     uncheckedThumbColor = Grey2,
-                    uncheckedTrackColor = Grey
-                )
+                    uncheckedTrackColor = Grey,
+                ),
+                enabled = false
             )
 
         }
@@ -65,5 +72,5 @@ fun StudentWithSwitchCard(data: UserModel) {
 @Preview
 @Composable
 fun StudentWithSwitchCardPreview() {
-    StudentWithSwitchCard(data = UserModel(0,"202001488",TypeUser.STUDENT,"김문기,","01076867103","000lyi@inu.ac.kr","컴퓨터공학부", GenderUser.MALE))
+    StudentWithSwitchCard(data = AttendantModel(3,"202001541","이용인",AttendanceState.ATTENDANCE))
 }
