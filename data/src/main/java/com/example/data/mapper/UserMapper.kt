@@ -1,9 +1,11 @@
 package com.example.data.mapper
 
 import com.example.data.dto.AttendantResponseDto
+import com.example.data.dto.UserBriefResponseDto
 import com.example.data.dto.UserResponseDto
 import com.example.data.util.INF
 import com.example.domain.model.AttendantModel
+import com.example.domain.model.UserBriefModel
 import com.example.domain.model.UserModel
 import com.example.domain.model.type.AttendanceState
 import com.example.domain.model.type.GenderUser
@@ -38,6 +40,14 @@ object UserMapper {
             idUser = dto.idUser,
             name = dto.name,
             state = dto.state
+        )
+    }
+
+    fun mapToUserBriefModel(dto: UserBriefResponseDto): UserBriefModel {
+        return UserBriefModel(
+            id = dto.id?:INF,
+            idUser = dto.idUser?:"",
+            name = dto.name?:""
         )
     }
 }

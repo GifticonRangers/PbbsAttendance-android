@@ -6,6 +6,8 @@ import com.example.data.repository.datasource.AttendanceRemoteDataSource
 import com.example.domain.model.AttendanceHistoryModel
 import com.example.domain.model.AttendanceTotalModel
 import com.example.domain.model.LectureDateModel
+import com.example.domain.model.UserBriefModel
+import com.example.domain.model.dto.IdAttendanceStateDto
 import com.example.domain.model.dto.LectureInfoDto
 import com.example.domain.model.dto.StudentSubjectDto
 import com.example.domain.model.dto.UserSubjectDto
@@ -46,5 +48,13 @@ class AttendanceRepositoryImpl @Inject constructor(private val remoteDataSource:
 
     override suspend fun showLiveAttendanceHistory(dto: StudentSubjectDto): Flow<ArrayList<AttendanceHistoryModel>> {
         return remoteDataSource.showLiveAttendanceHistory(dto)
+    }
+
+    override suspend fun showHoldAttendance(dto: LectureInfoDto): ArrayList<UserBriefModel> {
+        return remoteDataSource.showHoldAttendance(dto)
+    }
+
+    override suspend fun updateAttendance(dto: IdAttendanceStateDto): AttendanceHistoryModel {
+        return remoteDataSource.updateAttendance(dto)
     }
 }

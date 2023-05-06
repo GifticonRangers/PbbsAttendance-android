@@ -5,5 +5,6 @@ enum class AttendanceState(val state:String){
     LATE("LATE"),
     ABSENCE("ABSENCE"),
     PUBLIC_ABSENCE("PUBLIC_ABSENCE"),
+    HOLD("HOLD"),
     NULL("NULL")
 }
