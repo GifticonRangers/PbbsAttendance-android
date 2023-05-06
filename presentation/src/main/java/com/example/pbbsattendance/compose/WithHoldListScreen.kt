@@ -1,6 +1,8 @@
 package com.example.pbbsattendance.compose.component
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -23,13 +25,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.domain.model.AttendanceTotalModel
+import com.example.domain.model.UserBriefModel
 import com.example.domain.model.UserModel
+import com.example.domain.model.dto.IdAttendanceStateDto
 import com.example.domain.model.dto.UserSubjectDto
 import com.example.domain.model.type.GenderUser
 import com.example.domain.model.type.TypeUser
 import com.example.pbbsattendance.R
 import com.example.pbbsattendance.compose.LectureTimeModalContent
+import com.example.pbbsattendance.mapper.UserMapper
 import com.example.pbbsattendance.model.LectureTimeItemModel
+import com.example.pbbsattendance.model.UserNewStateModel
 import com.example.pbbsattendance.ui.theme.*
 import com.example.pbbsattendance.viewmodel.MainViewModel
 import com.example.pbbsattendance.viewmodel.WithHoldListViewModel
@@ -44,26 +50,44 @@ fun WithHoldListScreen(
     val scheduleSubject = mainViewModel.getScheduleSubject()
     val lectureTimeItem = mainViewModel.getLectureTimeItem()
     val user = mainViewModel.getUser()
-
-    withHoldListViewModel.getAttendanceTotalInfo(lectureTimeItem,scheduleSubject.originId)
-    withHoldListViewModel.getAttendanceDateList(UserSubjectDto(idUser = user.id, idSubject = scheduleSubject.originId))
+    LaunchedEffect(Unit){
+        withHoldListViewModel.getAttendanceTotalInfo(lectureTimeItem,scheduleSubject.originId)
+        withHoldListViewModel.getAttendanceDateList(UserSubjectDto(idUser = user.id, idSubject = scheduleSubject.originId))
+        withHoldListViewModel.getHoldAttendanceList(lectureTimeItem, scheduleSubject.originId)
+    }
     val attendanceTotal by withHoldListViewModel.attendanceTotal.observeAsState(AttendanceTotalModel(0,0,0,0))
     val dateList by withHoldListViewModel.dateList.observeAsState(initial = emptyList())
+    val holdList by withHoldListViewModel.holdList.observeAsState(initial = emptyList())
 
     WithHoldListScreen(
         attendanceTotal = attendanceTotal,
         dateList = dateList,
         scheduleSubject = scheduleSubject,
         onGetSelectedAttendance = { index ->
+            Log.i("WithHoldListScreen.onGetSelectedAttendance::","week: ${dateList[index].week}, time: ${dateList[index].time}, date: ${dateList[index].date}")
             withHoldListViewModel.getAttendanceTotalInfo(dateList[index],scheduleSubject.originId)
+            withHoldListViewModel.getHoldAttendanceList(dateList[index], scheduleSubject.originId)
         },
-        selectedLectureTime = lectureTimeItem
+        selectedLectureTime = lectureTimeItem,
+        holdList = holdList,
+        onUpdateAttendance = {
+            Log.i("WithHoldListScreen.onUpdateAttendance::","${it.userBriefModel.name}, ${it.state}")
+            withHoldListViewModel.updateAttendance(it)
+        }
     )
 }
 
 @Composable
 @OptIn(ExperimentalMaterialApi::class)
-fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<LectureTimeItemModel>, scheduleSubject:ScheduleEntity, onGetSelectedAttendance:(Int)->Unit = {}, selectedLectureTime:LectureTimeItemModel){
+fun WithHoldListScreen(
+    attendanceTotal:AttendanceTotalModel,
+   dateList:List<LectureTimeItemModel>,
+   scheduleSubject:ScheduleEntity,
+   onGetSelectedAttendance:(Int)->Unit = {},
+   selectedLectureTime:LectureTimeItemModel,
+   holdList:List<UserBriefModel>,
+    onUpdateAttendance:(dto:UserNewStateModel)->Unit = {}
+){
     val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     var lectureTime by remember{
@@ -75,6 +99,9 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
     }
     var dialogState by remember {
         mutableStateOf(false)
+    }
+    var selectedHoldAttendant by remember {
+        mutableStateOf(UserBriefModel(0,"",""))
     }
 
     ModalBottomSheetLayout(
@@ -113,7 +140,7 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
             ) {
                 Row(){
                     Text(text = "학생",style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Grey, modifier = Modifier.padding(start=5.dp))
-                    Text(text = "n",style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Blue3, modifier = Modifier.padding(start=5.dp))
+                    Text(text = holdList.size.toString(),style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W500, fontSize = 12.sp), color = Blue3, modifier = Modifier.padding(start=5.dp))
                 }
                 Row(
                     verticalAlignment = Alignment.CenterVertically
@@ -131,13 +158,16 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
             }
             LazyColumn {
                 itemsIndexed(
-                    listOf(UserModel(1,"2020209999", TypeUser.STUDENT,"김문기","010-7686-7103","051@inu.ac.kr","컴퓨터공학부",GenderUser.MALE))
+                    holdList
                 )
                 { index, item ->
                     Row(
-                        Modifier.clickable { dialogState = true }
+                        Modifier.clickable {
+                            selectedHoldAttendant = item
+                            dialogState = true
+                        }
                     ) {
-                        StudentCard(data = item)
+                        StudentWithWaringCard(data = UserMapper.mapToUserFromUserBrief(item))
                     }
                 }
             }
@@ -154,7 +184,6 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
                                 style = TextStyle(fontFamily = suit_semibold, fontWeight = FontWeight.Bold, fontSize = 16.sp),
                                 color = Indigo,
                             )
-
                         }
                     },
                     text = {
@@ -162,7 +191,8 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
                             horizontalArrangement = Arrangement.End,
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text("김진 202001541", style = TextStyle(fontFamily = suit_medium, fontWeight = FontWeight.Medium, fontSize = 8.sp), color = Grey )
+                            Text(selectedHoldAttendant.name, style = TextStyle(fontFamily = suit_medium, fontWeight = FontWeight.Medium, fontSize = 8.sp), color = Grey )
+                            Text(selectedHoldAttendant.idUser, style = TextStyle(fontFamily = suit_medium, fontWeight = FontWeight.Medium, fontSize = 8.sp), color = Grey )
                         }
                     },
                     confirmButton = {
@@ -174,7 +204,10 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
                                 .fillMaxWidth()
                                 .padding(horizontal = 10.dp, vertical = 5.dp)
                                 .height(33.dp),
-                            onClick = { dialogState = false }
+                            onClick = {
+                                onUpdateAttendance(UserNewStateModel(selectedHoldAttendant,0))
+                                dialogState = false
+                            }
                         ){
                             Text("출석", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
                         }
@@ -186,7 +219,10 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
                                 .fillMaxWidth()
                                 .padding(horizontal = 10.dp, vertical = 5.dp)
                                 .height(33.dp),
-                            onClick = { dialogState = false }
+                            onClick = {
+                                onUpdateAttendance(UserNewStateModel(selectedHoldAttendant,1))
+                                dialogState = false
+                            }
                         ){
                             Text("지각", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
                         }
@@ -198,7 +234,10 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
                                 .fillMaxWidth()
                                 .padding(horizontal = 10.dp, vertical = 5.dp)
                                 .height(33.dp),
-                            onClick = { dialogState = false }
+                            onClick = {
+                                onUpdateAttendance(UserNewStateModel(selectedHoldAttendant,2))
+                                dialogState = false
+                            }
                         ){
                             Text("결석", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
                         }
@@ -210,7 +249,10 @@ fun WithHoldListScreen(attendanceTotal:AttendanceTotalModel, dateList:List<Lectu
                                 .fillMaxWidth()
                                 .padding(horizontal = 10.dp, vertical = 5.dp)
                                 .height(33.dp),
-                            onClick = { dialogState = false }
+                            onClick = {
+                                onUpdateAttendance(UserNewStateModel(selectedHoldAttendant,3))
+                                dialogState = false
+                            }
                         ){
                             Text("공결", style = TextStyle(fontFamily = suit_regular, fontWeight = FontWeight.W400, fontSize = 12.sp), color = Grey)
                         }
@@ -228,6 +270,7 @@ fun WithHoldListScreenPreview() {
         AttendanceTotalModel(attendance = 0, late = 0, absence = 0, public_ABSENCE = 0),
         dateList = listOf(LectureTimeItemModel(time="1", date = "23/04/30",week="9")),
         scheduleSubject = ScheduleEntity(originId = 0, scheduleDay = 30, scheduleName = "캡스톤디자인(2)", roomInfo = "505호", startTime = "10:00", endTime = "11:50"),
-        selectedLectureTime = LectureTimeItemModel(time="1", date = "23/04/30",week="9")
+        selectedLectureTime = LectureTimeItemModel(time="1", date = "23/04/30",week="9"),
+        holdList = listOf(UserBriefModel(3,"202001541","이용인"))
     )
 }

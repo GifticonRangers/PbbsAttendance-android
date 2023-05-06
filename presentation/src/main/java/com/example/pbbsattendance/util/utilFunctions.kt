@@ -69,8 +69,6 @@ fun colorMapper(status: String): Color {
     }
 }
 
-fun checkIdRegex(text:String){}
-
 fun changeToPhoneNumber(text:String):String{
     val subString1 = text.substring(0 until 3)
     val subString2 = text.substring(3 until 7)
@@ -86,4 +84,11 @@ fun isEmptyLectureTimeItem(data:LectureTimeItemModel):Boolean{
 
 fun getPayload(text:String):String{
     return text.substring(33)
+}
+
+fun isAttendance(state:String):Boolean{
+    when(state){
+        AttendanceState.ATTENDANCE.state -> return true
+        else -> return false
+    }
 }
